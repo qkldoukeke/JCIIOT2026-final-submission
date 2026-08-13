@@ -1,0 +1,63 @@
+# JCIIOT 2026 工业具身智能挑战赛技术报告
+
+## 1. Technology Description
+
+本方案面向 FactorySorting L1–L5 搬运任务，在主办方固定的 MuJoCo、robosuite、robomimic、评分器与任务目录之上，实现“文档理解—任务规划—导航—抓取—携物运输—放置—轨迹评分”的完整闭环。修改严格限定在主办方允许的 `src/robot_agent/skills/`、`src/robot_agent/workflows/` 和 `knowledge/robot_params.json`。
+
+### 1.1 SOP 与任务路由
+
+`read_document.py` 从五份原始 Word SOP 提取任务语义，并结合只读 `task_config.json` 与官方语义地图生成团队 SOP。`library.py` 在 Execute 构建 Agent 时依据当前环境自动激活 `generated_sop_l1.md` 至 `generated_sop_l5.md`，避免人工切题时混用 SOP。
+
+### 1.2 导航与携物安全
+
+`move.py` 使用官方地图进行路径规划，并加入携物额外安全余量、源站离站路线验证、端点有限豁免和不可行时的 A* 降级。最终参数为 `max_linear=2.0 m/s`、`max_angular=1.2 rad/s`、`path_extra_clearance=0.20 m`、`source_egress_retreat=0.60 m`。
+
+### 1.3 混合抓取与逐题模型
+
+`pick_up.py` 使用程序化物理抓取作为首选路径，BC 策略作为失败恢复路径；成功必须通过接触、持握和抬升验证。五题使用各自满分运行中实际加载的模型，程序根据官方环境名自动选择，无需手工修改配置：
+
+| 关卡 | 环境 | 最终 BC 恢复模型 |
+|---|---|---|
+| L1 | `FactorySorting1_3FO3ERFHISEM` | `team_submission/models/final/l1/model_epoch_20.pth` |
+| L2 | `FactorySorting3_3FO3ERRPH7X9` | `team_submission/models/final/l2/model_epoch_50.pth` |
+| L3 | `FactorySorting5_3FO3ERTPXEUT` | `team_submission/models/final/l3/model_epoch_100.pth` |
+| L4 | `FactorySorting7_3FO3ERFKY9RN` | `team_submission/models/final/l4/model_epoch_50.pth` |
+| L5 | `FactorySorting9_3FO3ERT2C5FP` | `team_submission/models/final/l5/model_epoch_100.pth` |
+
+### 1.4 放置策略
+
+`place_down.py` 在携物转向前先进入安全区，并根据实时目标桌几何执行安全接近。L5 对三个目标物使用分散槽位，降低已放置箱体被后续箱体碰落的风险。
+
+## 2. Novelty Statement
+
+本方案不声称提出新的基础网络结构，创新集中在任务语义驱动的系统集成与可靠性增强：
+
+1. 将 Word SOP、锁定任务目录和语义地图编译为逐题可审计知识，并按实时环境自动路由；
+2. 将实时几何程序化抓取与逐题 BC 恢复模型组成混合策略，兼顾确定性与分布外恢复；
+3. 将携物后的有效机器人外形纳入导航与放置风险控制，并为 L5 多物体设计动态槽位；
+4. 对主办方禁止修改区执行逐文件 SHA-256 审计，使提交边界可复核。
+
+更详细的创新范围、消融与局限见 `team_submission/NOVELTY_STATEMENT.md`。
+
+## 3. Results & Analysis
+
+2026-08-11 在同一最终代码版本上的五题记录如下：
+
+| 关卡 | 得分 | 满分 | 时间 | 结果证据 |
+|---|---:|---:|---:|---|
+| L1 | 10 | 10 | 39.584 s | `team_submission/evidence/L1/score.json` |
+| L2 | 15 | 15 | 39.549 s | `team_submission/evidence/L2/score.json` |
+| L3 | 20 | 20 | 40.750 s | `team_submission/evidence/L3/score.json` |
+| L4 | 25 | 25 | 49.415 s | `team_submission/evidence/L4/score.json` |
+| L5 | 30 | 30 | 98.462 s | `team_submission/evidence/L5/score.json` |
+| 合计 | **100** | **100** | **267.760 s** | 五题均为 `status=OK` |
+
+L5 三个物体均完成抓取、离开源站和进入目标半径，单物体两项各得 5 分。五个评分文件均由官方评分流程生成；对应 result 与 trajectory 同时保存在 evidence 目录。
+
+## 4. Compliance
+
+审计基准为主办方仓库提交 `01032e8dc97fcd376502b71327ad8cbea6b6589b`。受保护范围包括 `app.py`、`knowledge/task_config.json`、整个 `src/robot_agent/core/`、整个 `src/robot_agent/environments/` 与整个 `robosuite/`。审计结果为 4,971 个文件逐字节一致、1 个官方 Git LFS 权重正确实体化、修改 0、缺失 0、违规 0。完整报告见 `team_submission/audits/official_boundary_audit.md` 和同名 JSON。
+
+## 5. Limitations
+
+程序化抓取依赖仿真环境可解析的物体几何与抓取 site；BC 恢复模型仍可能受训练分布外状态影响。最终记录来自本地官方仿真环境，正式排行榜成绩以主办方复现和评分为准。

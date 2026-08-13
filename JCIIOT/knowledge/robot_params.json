@@ -1,0 +1,81 @@
+{
+  "_comment": "=== Robot Execution Parameters === 选手可调整此文件来优化机器人性能，重启 app.py 后生效。碰撞检测参数不在此文件中，不可调整。",
+  "llm": {
+    "_comment": "LLM 大模型配置 —— 控制任务规划和视觉理解的模型接入",
+    "ollama_base_url": "http://localhost:11434",
+    "ollama_model": "qwen3.6:27b-mtp-q4_K_M",
+    "vision_model": "qwen3-vl:8b",
+    "openai_base_url": "https://api.deepseek.com",
+    "openai_model": "deepseek-v4-flash"
+  },
+  "navigation": {
+    "_comment": "导航参数 —— 控制底盘移动的速度、精度和模式",
+    "max_steps": 3000,
+    "waypoint_tolerance": 0.01,
+    "settle_steps": 5,
+    "max_linear": 2.00,
+    "max_angular": 1.20,
+    "k_linear": 1.2,
+    "k_angular": 1.8,
+    "holonomic_base": true,
+    "yaw_control": false,
+    "turn_in_place_angle": 0.65,
+    "drive_mode": "direct",
+    "control_freq": 20,
+    "path_extra_clearance": 0.20,
+    "path_endpoint_exemption": 0.30,
+    "source_egress_retreat": 0.60
+  },
+  "grasp_policy": {
+    "_comment": "BC 抓取策略参数 —— 控制基于行为克隆的抓取执行",
+    "checkpoint_path": "team_submission/models/final/l1/model_epoch_20.pth",
+    "checkpoint_fallback_path": "robosuite/robosuite/model_epoch_150.pth",
+    "task_checkpoints": {
+      "FactorySorting1_3FO3ERFHISEM": "team_submission/models/final/l1/model_epoch_20.pth",
+      "FactorySorting3_3FO3ERRPH7X9": "team_submission/models/final/l2/model_epoch_50.pth",
+      "FactorySorting5_3FO3ERTPXEUT": "team_submission/models/final/l3/model_epoch_100.pth",
+      "FactorySorting7_3FO3ERFKY9RN": "team_submission/models/final/l4/model_epoch_50.pth",
+      "FactorySorting9_3FO3ERT2C5FP": "team_submission/models/final/l5/model_epoch_100.pth"
+    },
+    "eval_steps": 360,
+    "post_hold_steps": 5,
+    "initial_view_steps": 5,
+    "debug_policy": false,
+    "debug_every": 25,
+    "record_frame_interval": 5,
+    "scripted_first_with_bc_recovery": true,
+    "arm_action_slew_limit": 0.05,
+    "zero_arm_rotation_actions": true
+  },
+  "lift": {
+    "_comment": "抬升参数 —— 抓取后验证物体是否牢固的抬升阶段",
+    "lift_height": 0.15,
+    "max_steps": 300,
+    "hold_steps": 20,
+    "tolerance": 0.02,
+    "max_action": 0.80
+  },
+  "turn": {
+    "_comment": "转向参数 —— 放置前机器人面向目标站的转向控制",
+    "tolerance": 0.02,
+    "max_iters": 8,
+    "turn_steps": 40,
+    "settle_steps": 10
+  },
+  "place": {
+    "_comment": "放置参数 —— 控制物体下放和释放的精细操作",
+    "lower_delta": 0.18,
+    "lower_steps": 25,
+    "release_steps": 60,
+    "release_clearance": 0.04,
+    "safe_approach_enabled": true,
+    "safe_approach_min_turn_angle": 0.35,
+    "safe_approach_attachment_scale": 1.0,
+    "safe_approach_margin": 0.15,
+    "safe_approach_max_retreat": 1.30,
+    "distribute_multi_object_slots": true,
+    "multi_object_score_radius": 0.80,
+    "multi_object_score_margin": 0.10,
+    "multi_object_slot_spacing_scale": 0.96
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "task_index": 0,
+  "env_name": "FactorySorting1_3FO3ERFHISEM",
+  "status": "OK",
+  "trajectory": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/recordings/FactorySorting1_3FO3ERFHISEM/trajectory_20260811_103852_OK.json",
+  "elapsed_sec": 39.584,
+  "score": 10,
+  "score_rule_version": "grasp_success_gate_l5_multi_v2",
+  "details": {
+    "total": 10,
+    "items": [
+      {
+        "label": "Grasp success & left source (grasp=yes, dx_src=7.23m, dy_src=11.23m)",
+        "score": 5,
+        "ok": true
+      },
+      {
+        "label": "Object reached target table after grasp (grasp=yes, dist=0.12m, x=-0.04, y=-7.29, z=1.02)",
+        "score": 5,
+        "ok": true
+      }
+    ]
+  },
+  "saved_at": "2026-08-11 10:39:32"
+}

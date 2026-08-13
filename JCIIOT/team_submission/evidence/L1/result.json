@@ -1,0 +1,486 @@
+{
+  "task": "For this task, you need to transport a blue, hollow plastic box. Please move it from the starting point \"Pick Station 2\" to the destination \"Place Station 3\". Please follow the Standard Operating Procedure (SOP).",
+  "task_index": 0,
+  "env_name": "FactorySorting1_3FO3ERFHISEM",
+  "status": "OK",
+  "success": true,
+  "trajectory": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/recordings/FactorySorting1_3FO3ERFHISEM/trajectory_20260811_103852_OK.json",
+  "running_trajectory": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/recordings/FactorySorting1_3FO3ERFHISEM/trajectory_20260811_103852_RUNNING.json",
+  "result": {
+    "skill_name": "composed",
+    "success": true,
+    "message": "该计划严格按照 L1 单线运输 SOP 执行，确保从 input_5 抓取指定物体并安全放置到 output_4。",
+    "steps": [
+      {
+        "skill": "move",
+        "description": "导航至取货工位接近点",
+        "success": true,
+        "message": "Moved to: input_5",
+        "payload": {
+          "action": "move",
+          "target": "input_5",
+          "requested_target": "input_5",
+          "station_mapping": null,
+          "source_egress": null,
+          "goal_xy": [
+            8.0,
+            4.619
+          ],
+          "start_base_pose": {
+            "xy": [
+              13.5,
+              0.0
+            ],
+            "yaw": 3.1415927410125732,
+            "robot_base_pos": [
+              13.5,
+              0.0,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              3.1415927410125732
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              8.000004779339783,
+              4.599998009446135
+            ],
+            "yaw": -3.1398613452911377,
+            "robot_base_pos": [
+              8.000004779339783,
+              4.599998009446135,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1398613452911377
+            ]
+          },
+          "waypoints": 36,
+          "path_length_m": 12.878471405159575,
+          "path_extra_clearance_m": 0.05000000000000002,
+          "max_linear_mps": 2.0,
+          "reached": true
+        },
+        "inputs": {
+          "target": "input_5",
+          "object_name": "line_5_container_h01_near"
+        },
+        "preconditions": [
+          "底盘静止于起始位置"
+        ],
+        "expected_output": "机器人到达 input_5 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "pick_up",
+        "description": "在取货工位抓取目标物体",
+        "success": true,
+        "message": "Physics grasp OK: input_5",
+        "payload": {
+          "action": "pick_up",
+          "target": "input_5",
+          "requested_target": "input_5",
+          "station_mapping": null,
+          "object_name": "line_5_container_h01_near",
+          "grasp_initial_base_pose": {
+            "xy": [
+              8.00003787141193,
+              4.621013498132376
+            ],
+            "yaw": -3.139453,
+            "robot_base_pos": [
+              8.00003787141193,
+              4.621013498132376,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.139453
+            ],
+            "current_xy": [
+              8.000004779339783,
+              4.599998009446135
+            ],
+            "current_yaw": -3.1398613452911377,
+            "object_center": [
+              7.059,
+              4.619,
+              1.1254781521965824
+            ],
+            "object_center_source": "MuJoCo site line_5_container_h01_near_default_site",
+            "teacher_calibration": {
+              "standoff_m": 0.9410400255070059,
+              "teacher_environment": "FactorySorting1_3FO3ERFHISEM",
+              "teacher_object": "line_5_container_h01_near",
+              "teacher_base_xy": [
+                8.000001,
+                4.6
+              ],
+              "teacher_base_yaw": 3.1394220002986786,
+              "teacher_object_center": [
+                7.059,
+                4.619,
+                1.1255
+              ],
+              "teacher_object_center_source": "MuJoCo site line_5_container_h01_near_default_site",
+              "authority": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/load_factory_sorting_1_3fo3erfhisem_collect.py"
+            },
+            "yaw_source": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/knowledge/task_config.json grasp_poses.input_5.yaw",
+            "formula": "live_object_xy - heading(configured_yaw) * official_L1_teacher_standoff",
+            "navigation_yaw_alignment": {
+              "success": true,
+              "base_xy": [
+                7.999965226712579,
+                4.621009564530941
+              ],
+              "locked_base_xy": [
+                7.999965226712579,
+                4.621009564530941
+              ],
+              "xy_drift": 0.0,
+              "start_yaw": -3.1398446559906006,
+              "target_yaw": -3.139453,
+              "final_yaw": -3.1398446559906006,
+              "final_error": 0.0003916559906005368,
+              "tolerance": 0.02,
+              "method": "official_direct_base_yaw"
+            }
+          },
+          "grasp_alignment": {
+            "xy": [
+              8.00003787141193,
+              4.621013498132376
+            ],
+            "yaw": -3.139453,
+            "robot_base_pos": [
+              8.00003787141193,
+              4.621013498132376,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.139453
+            ],
+            "current_xy": [
+              8.000004779339783,
+              4.599998009446135
+            ],
+            "current_yaw": -3.1398613452911377,
+            "object_center": [
+              7.059,
+              4.619,
+              1.1254781521965824
+            ],
+            "object_center_source": "MuJoCo site line_5_container_h01_near_default_site",
+            "teacher_calibration": {
+              "standoff_m": 0.9410400255070059,
+              "teacher_environment": "FactorySorting1_3FO3ERFHISEM",
+              "teacher_object": "line_5_container_h01_near",
+              "teacher_base_xy": [
+                8.000001,
+                4.6
+              ],
+              "teacher_base_yaw": 3.1394220002986786,
+              "teacher_object_center": [
+                7.059,
+                4.619,
+                1.1255
+              ],
+              "teacher_object_center_source": "MuJoCo site line_5_container_h01_near_default_site",
+              "authority": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/load_factory_sorting_1_3fo3erfhisem_collect.py"
+            },
+            "yaw_source": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/knowledge/task_config.json grasp_poses.input_5.yaw",
+            "formula": "live_object_xy - heading(configured_yaw) * official_L1_teacher_standoff",
+            "navigation_yaw_alignment": {
+              "success": true,
+              "base_xy": [
+                7.999965226712579,
+                4.621009564530941
+              ],
+              "locked_base_xy": [
+                7.999965226712579,
+                4.621009564530941
+              ],
+              "xy_drift": 0.0,
+              "start_yaw": -3.1398446559906006,
+              "target_yaw": -3.139453,
+              "final_yaw": -3.1398446559906006,
+              "final_error": 0.0003916559906005368,
+              "tolerance": 0.02,
+              "method": "official_direct_base_yaw"
+            }
+          },
+          "grasp_router": "scripted_first_with_bc_recovery",
+          "method": "physics",
+          "ok": true
+        },
+        "inputs": {
+          "target": "input_5",
+          "object_name": "line_5_container_h01_near",
+          "grasp_initial_base_pose": {
+            "xy": [
+              8.000004779339783,
+              4.599998009446135
+            ],
+            "yaw": -3.1398613452911377,
+            "robot_base_pos": [
+              8.000004779339783,
+              4.599998009446135,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1398613452911377
+            ]
+          }
+        },
+        "preconditions": [
+          "夹爪为空",
+          "底盘已停稳"
+        ],
+        "expected_output": "成功抓取物体并提升至安全高度",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "携带物体导航至放置工位",
+        "success": true,
+        "message": "Moved to: output_4",
+        "payload": {
+          "action": "move",
+          "target": "output_4",
+          "requested_target": "output_4",
+          "station_mapping": null,
+          "source_egress": {
+            "source": "input_5",
+            "held_object": "line_5_container_h01_near",
+            "start_xy": [
+              7.999965226712579,
+              4.621009564530941
+            ],
+            "source_center_xy": [
+              7.186,
+              3.938
+            ],
+            "source_approach_xy": [
+              8.0,
+              4.619
+            ],
+            "outward_unit_xy": [
+              0.7669841226098995,
+              0.6416660780065616
+            ],
+            "rejected_egress_xy": [
+              8.460155700278518,
+              5.006009211334878
+            ],
+            "egress_distance_m": 0.6,
+            "method": "a_star_fallback_blocked_straight_egress"
+          },
+          "goal_xy": [
+            -1.02,
+            -7.29
+          ],
+          "start_base_pose": {
+            "xy": [
+              7.999965226712579,
+              4.621009564530941
+            ],
+            "yaw": -3.1398446559906006,
+            "robot_base_pos": [
+              7.999965226712579,
+              4.621009564530941,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1398446559906006
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              -0.9999824289392113,
+              -7.300002505575327
+            ],
+            "yaw": 3.1364471912384033,
+            "robot_base_pos": [
+              -0.9999824289392113,
+              -7.300002505575327,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              3.1364471912384033
+            ]
+          },
+          "waypoints": 67,
+          "path_length_m": 24.300157727451918,
+          "path_extra_clearance_m": 0.05000000000000002,
+          "max_linear_mps": 2.0,
+          "reached": true
+        },
+        "inputs": {
+          "target": "output_4"
+        },
+        "preconditions": [
+          "夹爪已持握物体"
+        ],
+        "expected_output": "机器人到达 output_4 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "place_down",
+        "description": "在放置工位放下物体",
+        "success": true,
+        "message": "Physics place OK: output_4",
+        "payload": {
+          "action": "place_down",
+          "target": "output_4",
+          "requested_target": "output_4",
+          "station_mapping": null,
+          "method": "physics",
+          "safe_approach": {
+            "applied": true,
+            "target": "output_4",
+            "reason": "retreat_turn_straight_approach",
+            "attachment_radius_m": 0.9379665028262673,
+            "center_to_approach_m": 0.854,
+            "turn_angle_rad": 3.1364471912384033,
+            "approach_xy": [
+              -1.02,
+              -7.29
+            ],
+            "retreat_distance_m": 1.0879665028262673,
+            "staging_xy": [
+              -2.107966502826267,
+              -7.29
+            ],
+            "final_xy": [
+              -1.0200164648224586,
+              -7.289996532314736
+            ],
+            "final_yaw": -1.2833869504902395e-06,
+            "turn_result": {
+              "success": true,
+              "target_xy": [
+                -0.166,
+                -7.29
+              ],
+              "base_xy": [
+                -2.0999043043504297,
+                -7.290076114573407
+              ],
+              "locked_base_xy": [
+                -2.099904303689512,
+                -7.2900761147071345
+              ],
+              "xy_drift": 6.743108297369361e-10,
+              "target_distance": 1.9339043051873757,
+              "start_yaw": 3.136375665664673,
+              "target_yaw": 3.935805248993375e-05,
+              "final_yaw": 7.170983735704795e-05,
+              "start_error": -3.136336307612183,
+              "final_error": -3.235178486704626e-05,
+              "tolerance": 0.02,
+              "turn_steps": 40,
+              "settle_steps": 10
+            }
+          },
+          "multi_object_slot": {
+            "applied": true,
+            "target": "output_4",
+            "object_name": "line_5_container_h01_near",
+            "reason": "dynamic_semantic_table_slot",
+            "object_index": 0,
+            "object_count": 2,
+            "slot_multiplier": 0,
+            "slot_spacing_m": 0.4848,
+            "offset_from_target_center_m": 0.0,
+            "center_xy": [
+              -0.166,
+              -7.29
+            ],
+            "approach_xy": [
+              -1.02,
+              -7.29
+            ],
+            "semantic_target_center_xy": [
+              -0.166,
+              -7.29
+            ],
+            "semantic_target_size_xy": [
+              0.502,
+              1.01
+            ],
+            "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_1_3fo3erfhisem_scene_regenerated_semantic_map.json"
+          },
+          "ok": true
+        },
+        "inputs": {
+          "target": "output_4"
+        },
+        "preconditions": [
+          "底盘已停稳于放置点"
+        ],
+        "expected_output": "物体放置成功，夹爪释放并收回",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      }
+    ],
+    "thinking": {
+      "version": "2.0",
+      "task_understanding": "将蓝色空心塑料盒从 Pick Station 2 (input_5) 运输到 Place Station 3 (output_4)，遵循 L1 标准操作流程。",
+      "selection_reason": "根据 SOP，任务需要依次执行移动至取货点、抓取、移动至放置点、放置四个步骤，确保安全合规。",
+      "execution_steps": [
+        "导航至取货工位接近点",
+        "在取货工位抓取目标物体",
+        "携带物体导航至放置工位",
+        "在放置工位放下物体"
+      ],
+      "plan_summary": [
+        {
+          "skill": "move",
+          "description": "导航至取货工位接近点"
+        },
+        {
+          "skill": "pick_up",
+          "description": "在取货工位抓取目标物体"
+        },
+        {
+          "skill": "move",
+          "description": "携带物体导航至放置工位"
+        },
+        {
+          "skill": "place_down",
+          "description": "在放置工位放下物体"
+        }
+      ],
+      "result_explanation": "该计划严格按照 L1 单线运输 SOP 执行，确保从 input_5 抓取指定物体并安全放置到 output_4。"
+    },
+    "planner_raw": "{\n  \"understanding\": \"将蓝色空心塑料盒从 Pick Station 2 (input_5) 运输到 Place Station 3 (output_4)，遵循 L1 标准操作流程。\",\n  \"reason\": \"根据 SOP，任务需要依次执行移动至取货点、抓取、移动至放置点、放置四个步骤，确保安全合规。\",\n  \"plan\": [\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"导航至取货工位接近点\",\n      \"inputs\": {\"target\": \"input_5\"},\n      \"preconditions\": [\"底盘静止于起始位置\"],\n      \"expected_output\": \"机器人到达 input_5 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"pick_up\",\n      \"description\": \"在取货工位抓取目标物体\",\n      \"inputs\": {\"target\": \"input_5\", \"object_name\": \"line_5_container_h01_near\"},\n      \"preconditions\": [\"夹爪为空\", \"底盘已停稳\"],\n      \"expected_output\": \"成功抓取物体并提升至安全高度\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"携带物体导航至放置工位\",\n      \"inputs\": {\"target\": \"output_4\"},\n      \"preconditions\": [\"夹爪已持握物体\"],\n      \"expected_output\": \"机器人到达 output_4 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"place_down\",\n      \"description\": \"在放置工位放下物体\",\n      \"inputs\": {\"target\": \"output_4\"},\n      \"preconditions\": [\"底盘已停稳于放置点\"],\n      \"expected_output\": \"物体放置成功，夹爪释放并收回\",\n      \"timeout\": 300,\n      \"retries\": 0\n    }\n  ],\n  \"explanation\": \"该计划严格按照 L1 单线运输 SOP 执行，确保从 input_5 抓取指定物体并安全放置到 output_4。\"\n}",
+    "plan_warnings": [],
+    "elapsed_ms": 33974.3
+  },
+  "elapsed_sec": 38.321,
+  "error": null,
+  "traceback": null,
+  "phase": "before_close",
+  "saved_at": "2026-08-11 10:39:31"
+}

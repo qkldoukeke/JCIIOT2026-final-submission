@@ -1,0 +1,44 @@
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python and editor artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+.vscode/
+.idea/
+*.egg-info/
+team_submission/.local/
+
+# Generated runtime output
+recordings/
+new/
+memory.json
+MUJOCO_LOG.TXT
+
+# Private demonstrations and training intermediates
+robosuite/robosuite/models/assets/demonstrations_private/
+team_submission/training_outputs/
+team_submission/training_outputs_smoke/
+team_submission/training_data/
+team_submission/training_data_raw/
+team_submission/optimization_versions/
+team_submission/success_baselines/
+team_submission/training_runs/
+
+# Only the five audited final checkpoints are submitted
+team_submission/models/*
+!team_submission/models/final/
+!team_submission/models/final/**
+
+# Temporary archives and reports generated locally
+*.zip
+*.tar
+*.tar.gz

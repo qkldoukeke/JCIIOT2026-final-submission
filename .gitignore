@@ -1,0 +1,12 @@
+# Python generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.DS_Store
+.idea/
+.docx_review_case3/
+
+# Upstream repository contains only unavailable Git LFS pointers for these
+# optional reference archives; they are not required by the competition app.
+competition description/USD/*/*.zip
+JCIIOT/robosuite/dataset/table_setup_from_dishwasher_sample.hdf5
