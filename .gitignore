@@ -10,3 +10,7 @@ __pycache__/
 # optional reference archives; they are not required by the competition app.
 competition description/USD/*/*.zip
 JCIIOT/robosuite/dataset/table_setup_from_dishwasher_sample.hdf5
+
+# Local artifact prepared for the competition upload form
+验证提交包/
+JCIIOT2026_验证提交_五题成功轨迹与技术文档.zip
