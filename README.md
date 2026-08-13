@@ -4,12 +4,12 @@ An erratum for the  SOP materials is available in [ERRATUM.md](./ERRATUM.md). Pl
 ## Team Final Submission
 
 - **Code repository:** [https://github.com/qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission)
-- [Technical Report](./TECHNICAL_REPORT.md)
-- [Reproduction Guide](./REPRODUCTION_GUIDE.md)
-- [Novelty Statement](./NOVELTY_STATEMENT.md)
-- [Submission Compliance](./SUBMISSION_COMPLIANCE.md)
-- [Final Submission Checklist](./FINAL_SUBMISSION_CHECKLIST.md)
-- [Leaderboard Issue Draft](./LEADERBOARD_ISSUE.md)
+- [技术报告](./技术报告.md)
+- [复现指南](./复现指南.md)
+- [新颖性声明](./新颖性声明.md)
+- [提交合规说明](./提交合规说明.md)
+- [最终提交清单](./最终提交清单.md)
+- [排行榜提交草稿](./排行榜提交草稿.md)
 
 ## Repository Structure and Leaderboard
 

@@ -1,6 +1,6 @@
 # Contestant Manual — Guide to Modifiable Files and Parameters
 
-> Team final-submission materials are in the repository root: [Technical Report](../TECHNICAL_REPORT.md), [Reproduction Guide](../REPRODUCTION_GUIDE.md), [Novelty Statement](../NOVELTY_STATEMENT.md), [Compliance Statement](../SUBMISSION_COMPLIANCE.md), and [Final Checklist](../FINAL_SUBMISSION_CHECKLIST.md). Code repository: [qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission).
+> 团队最终提交材料位于仓库根目录：[技术报告](../技术报告.md)、[复现指南](../复现指南.md)、[新颖性声明](../新颖性声明.md)、[提交合规说明](../提交合规说明.md)和[最终提交清单](../最终提交清单.md)。代码仓库：[qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission)。
 
 ## Competition Introduction
 
