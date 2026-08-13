@@ -1,11 +1,21 @@
 ## Notice
 An erratum for the  SOP materials is available in [ERRATUM.md](./ERRATUM.md). Please refer to it for the latest corrections and clarifications.
 
+## Team Final Submission
+
+- **Code repository:** [https://github.com/qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission)
+- [Technical Report](./TECHNICAL_REPORT.md)
+- [Reproduction Guide](./REPRODUCTION_GUIDE.md)
+- [Novelty Statement](./NOVELTY_STATEMENT.md)
+- [Submission Compliance](./SUBMISSION_COMPLIANCE.md)
+- [Final Submission Checklist](./FINAL_SUBMISSION_CHECKLIST.md)
+- [Leaderboard Issue Draft](./LEADERBOARD_ISSUE.md)
+
 ## Repository Structure and Leaderboard
 
 - The **Competition Description** section contains the problem statement and task description for this competition.
 
-- The **JCIIOT** folder contains the related code.
+- The **JCIIOT** folder contains the related code and final model assets.
 
 
 

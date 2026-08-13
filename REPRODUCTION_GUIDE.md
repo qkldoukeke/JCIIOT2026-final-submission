@@ -1,5 +1,9 @@
 # 最终版复现说明
 
+**代码仓库：** [https://github.com/qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission)
+
+克隆后进入仓库的 `JCIIOT/` 目录执行以下安装和测试步骤。
+
 ## 1. 环境
 
 - Python 3.11 或 3.12

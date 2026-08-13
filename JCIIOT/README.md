@@ -1,6 +1,6 @@
 # Contestant Manual — Guide to Modifiable Files and Parameters
 
-> Team final-submission materials: [Technical Report](team_submission/TECHNICAL_REPORT.md), [Reproduction Guide](team_submission/REPRODUCTION_GUIDE.md), [Novelty Statement](team_submission/NOVELTY_STATEMENT.md), [Compliance Audit](team_submission/audits/official_boundary_audit.md), and [Final Checklist](team_submission/FINAL_SUBMISSION_CHECKLIST.md).
+> Team final-submission materials are in the repository root: [Technical Report](../TECHNICAL_REPORT.md), [Reproduction Guide](../REPRODUCTION_GUIDE.md), [Novelty Statement](../NOVELTY_STATEMENT.md), [Compliance Statement](../SUBMISSION_COMPLIANCE.md), and [Final Checklist](../FINAL_SUBMISSION_CHECKLIST.md). Code repository: [qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission).
 
 ## Competition Introduction
 

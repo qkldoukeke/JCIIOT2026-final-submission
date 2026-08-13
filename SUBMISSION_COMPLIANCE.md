@@ -11,8 +11,8 @@
 | 主办方要求 | 当前状态 | 证据 |
 |---|---|---|
 | 完整链路为 move → pick_up → move → place_down | 通过 | 五题正式 result 均按该链路执行；L5 重复三次 |
-| 评分依据执行轨迹 JSON | 通过 | `recordings/` 中保留 score/result/trajectory |
-| 不修改 robosuite、机器人/物体、控制器 | 通过 | 4,953 个受保护文件哈希审计，违规 0 |
+| 评分依据执行轨迹 JSON | 通过 | `JCIIOT/team_submission/evidence/` 中保留五题最终 score/result/trajectory |
+| 不修改 robosuite、机器人/物体、控制器 | 通过 | 4,972 个受保护文件哈希审计，违规 0 |
 | 不修改 generated_maps | 通过 | 包含在受保护目录逐文件审计中 |
 | 不修改 environments/base.py、robosuite_backend.py | 通过 | 与参考 ZIP 逐字节一致 |
 | 不修改 core/types.py | 通过 | 与参考 ZIP 逐字节一致；接口字段未改 |
@@ -36,7 +36,7 @@
 
 唯一非逐字节项是 `robosuite/robosuite/model_epoch_150.pth`。参考 ZIP 内为 Git LFS 指针；当前实际文件大小 139,543,773 字节，SHA-256 为 `ef5910f6a9f6309b5ced617762dffeb1169a8b0cfcea892d158e6b483252169f`，与指针声明完全一致，属于官方资产正确下载。
 
-受保护目录还有 197 个 Python 缓存、30 个采集示范文件和 6 个安装元数据文件。它们不是参考源码修改，但正式提交包必须排除。
+本地受保护目录中的 Python 缓存、采集示范文件和安装元数据均由 Git 忽略，不进入 GitHub 提交。
 
 ## 当前允许范围内的源码变化
 
@@ -54,7 +54,7 @@
 - `grasp_fallback.py`；
 - `task_station_mapping.py`。
 
-参数变化位于允许的 `knowledge/robot_params.json`。训练数据、训练配置、模型、回退包、最终包和审计工具位于 `team_submission/`。
+参数变化位于允许的 `JCIIOT/knowledge/robot_params.json`。最终模型、证据和审计工具位于 `JCIIOT/team_submission/`；原始训练数据与历史回退包仅保留在本地，不上传。
 
 ## 团队 SOP 使用状态
 
@@ -83,8 +83,8 @@
 1. 再跑一次 `verify_official_boundary.py`，要求违规项为 0。
 2. 再跑一次 `verify_generated_sops.py`，要求 5/5 通过。
 3. 排除所有 `__pycache__`、`.pyc`、`demonstrations_private`、`*.egg-info`、临时日志、渲染中间文件和 `recordings/*_RUNNING.json`。
-4. 排除 `team_submission/.local/`；其中包含本机 API 配置和训练日志，已经由 `.gitignore` 忽略，但压缩提交时仍需显式确认。
+4. 排除 `JCIIOT/team_submission/.local/`；其中包含本机 API 配置，已经由 `.gitignore` 忽略。
 5. 不提交明文 API Key；由评测环境变量或现场侧边栏提供。
 6. 验证最终 checkpoint 路径存在，并与要运行的题目/统一模型策略一致。
-7. 运行 `team_submission/audits/verify_final_submission.py`，确认五模型哈希、五题证据与路由均通过。
-8. 按 `team_submission/REPRODUCTION_GUIDE.md` 使用官方入口启动。本地密钥文件不提交，由侧边栏或环境变量提供。
+7. 在 `JCIIOT/` 目录运行 `python team_submission/audits/verify_final_submission.py`，确认五模型哈希、五题证据与路由均通过。
+8. 按仓库根目录 `REPRODUCTION_GUIDE.md` 使用官方入口启动。本地密钥文件不提交，由侧边栏或环境变量提供。

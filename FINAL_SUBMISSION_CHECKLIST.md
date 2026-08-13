@@ -13,7 +13,7 @@
 - [x] 本机 API 凭据由 `.gitignore` 排除
 - [x] 训练数据、训练中间模型、缓存、录屏和旧压缩包由 `.gitignore` 排除
 - [ ] 在干净环境依次执行 L1–L5
-- [ ] 安装 Git LFS 并确认五个 `.pth` 均以 LFS 对象上传
+- [x] 安装 Git LFS，并确认官方基线与五个最终 `.pth` 共六个 LFS 对象上传成功
 - [ ] 填写 GitHub 仓库地址、团队名称和参赛 ID
-- [ ] GitHub 推送后在另一目录克隆并复现
+- [x] GitHub 推送完成，远程提交哈希与本地一致，Git LFS 完整性通过
 - [ ] 在主办方 GitHub 创建 leaderboard submission Issue

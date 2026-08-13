@@ -4,7 +4,7 @@
 - **Team:** `<请填写>`
 - **Total score:** `100 / 100`
 - **Submission date:** `2026-08-13`
-- **Repository:** `<GitHub 仓库地址>`
+- **Repository:** `https://github.com/qkldoukeke/JCIIOT2026-final-submission`
 
 ## Method summary
 
@@ -16,4 +16,4 @@ Local official scoring records: L1 10/10 (39.584 s), L2 15/15 (39.549 s), L3 20/
 
 ## Evidence
 
-See `team_submission/evidence/`, `team_submission/TECHNICAL_REPORT.md`, and `team_submission/audits/official_boundary_audit.md`.
+See `JCIIOT/team_submission/evidence/`, `TECHNICAL_REPORT.md`, and `JCIIOT/team_submission/audits/official_boundary_audit.md`.

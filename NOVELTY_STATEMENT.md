@@ -88,10 +88,10 @@ L5 三个箱体最终距目标中心分别为 0.09、0.55、0.10 m，均位于 0
 
 ## 8. 可复核入口
 
-- 边界审计：`team_submission/audits/verify_official_boundary.py`
-- SOP 审计：`team_submission/audits/verify_generated_sops.py`
-- 边界报告：`team_submission/audits/official_boundary_audit.json`
-- SOP 报告：`team_submission/audits/generated_sop_audit.json`
-- 最终五题证据：`team_submission/evidence/`
-- 最终模型清单：`team_submission/models/final/MODEL_MANIFEST.md`
+- 边界审计：`JCIIOT/team_submission/audits/verify_official_boundary.py`
+- SOP 审计：`JCIIOT/team_submission/audits/verify_generated_sops.py`
+- 边界报告：`JCIIOT/team_submission/audits/official_boundary_audit.json`
+- SOP 报告：`JCIIOT/team_submission/audits/generated_sop_audit.json`
+- 最终五题证据：`JCIIOT/team_submission/evidence/`
+- 最终模型清单：`JCIIOT/team_submission/models/final/MODEL_MANIFEST.md`
 - 完整关键实验记录：项目根目录 `实验开发日志.md`
