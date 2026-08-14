@@ -16,6 +16,11 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def repository_relative(project_root: Path, path: Path) -> str:
+    """Return a stable POSIX path relative to the JCIIOT project root."""
+    return path.resolve().relative_to(project_root.resolve()).as_posix()
+
+
 def main() -> int:
     project_root = Path(__file__).resolve().parents[2]
     task_config = project_root / "knowledge" / "task_config.json"
@@ -66,11 +71,11 @@ def main() -> int:
                 "source": task["source"],
                 "target": task["target"],
                 "objects": task.get("object", []),
-                "docx": str(docx),
+                "docx": repository_relative(project_root, docx),
                 "docx_sha256": sha256(docx) if docx.exists() else None,
-                "semantic_map": str(semantic_map),
+                "semantic_map": repository_relative(project_root, semantic_map),
                 "semantic_map_sha256": sha256(semantic_map) if semantic_map.exists() else None,
-                "generated_sop": str(generated),
+                "generated_sop": repository_relative(project_root, generated),
                 "generated_sop_sha256": sha256(generated) if generated.exists() else None,
                 "checks": checks,
                 "compliant": compliant,
@@ -105,7 +110,7 @@ def main() -> int:
     )
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "task_config": str(task_config),
+        "task_config": repository_relative(project_root, task_config),
         "task_config_sha256": sha256(task_config),
         "summary": {
             "sop_count": len(records),

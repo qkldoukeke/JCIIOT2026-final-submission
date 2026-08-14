@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-13T01:41:49.545548+00:00",
-  "task_config": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/knowledge/task_config.json",
+  "generated_at": "2026-08-14T14:26:17.494904+00:00",
+  "task_config": "knowledge/task_config.json",
   "task_config_sha256": "4ab0b19ed3599421f1de91aebdcc777d0bded83ed56cebe12f937cfc95d62331",
   "summary": {
     "sop_count": 5,
@@ -21,11 +21,11 @@
         "line_5_container_h01_near",
         "line_5_container_h01_far"
       ],
-      "docx": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/sop+prompt/JCIIOT 2026 case 1 SOP.docx",
+      "docx": "sop+prompt/JCIIOT 2026 case 1 SOP.docx",
       "docx_sha256": "32a446a8395b03b46c9581d3e4978bd84bd90f31096e675da77366fd1cdc9c1c",
-      "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_1_3fo3erfhisem_scene_regenerated_semantic_map.json",
+      "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_1_3fo3erfhisem_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "bc3e88317c2130de545cb785b8e82996dbb13ad373bd23d46e2103fe169be6d7",
-      "generated_sop": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/team_submission/generated_sops/generated_sop_l1.md",
+      "generated_sop": "team_submission/generated_sops/generated_sop_l1.md",
       "generated_sop_sha256": "18a94ba5ad5b6cd8ece219d753cdae9cd738d45aa3da65f097943fc7a941785e",
       "checks": {
         "docx_exists": true,
@@ -52,11 +52,11 @@
         "green_tote_b01_upper",
         "green_tote_b01_lower"
       ],
-      "docx": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/sop+prompt/JCIIOT 2026 case 3 SOP.docx",
+      "docx": "sop+prompt/JCIIOT 2026 case 3 SOP.docx",
       "docx_sha256": "8eb46479564acfefe6abc6929eb749ea9b96abd458b5066e968424aa88080e00",
-      "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_3_3fo3errph7x9_scene_regenerated_semantic_map.json",
+      "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_3_3fo3errph7x9_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "21feadfe3463f08c15d9c2c13beefb8ab56bdd77c873eaa9e93b7374f72bad9e",
-      "generated_sop": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/team_submission/generated_sops/generated_sop_l2.md",
+      "generated_sop": "team_submission/generated_sops/generated_sop_l2.md",
       "generated_sop_sha256": "7fee057b49104adf72facad678ea14234b9faf95c23b1f276111bff7840c4b06",
       "checks": {
         "docx_exists": true,
@@ -83,11 +83,11 @@
         "blue_tote_b01_far_right",
         "blue_tote_b01_near_right"
       ],
-      "docx": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/sop+prompt/JCIIOT 2026 case 5 SOP.docx",
+      "docx": "sop+prompt/JCIIOT 2026 case 5 SOP.docx",
       "docx_sha256": "e193fc7d16436d07a8091ecabee712cd9461066603df4d1efa09e9d6eb363927",
-      "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_5_3fo3ertpxeut_scene_regenerated_semantic_map.json",
+      "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_5_3fo3ertpxeut_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "2735e3e54fa37018c386e0623027729239d1a4c482fe5502326f012d59cf431c",
-      "generated_sop": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/team_submission/generated_sops/generated_sop_l3.md",
+      "generated_sop": "team_submission/generated_sops/generated_sop_l3.md",
       "generated_sop_sha256": "66bee1f881db201b1be6d826e11dc92bd997e1559d4483c77fa216f031822a2a",
       "checks": {
         "docx_exists": true,
@@ -114,11 +114,11 @@
         "blue_container_h01_back_upper",
         "blue_container_h01_back_lower"
       ],
-      "docx": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/sop+prompt/JCIIOT 2026 case 7 SOP.docx",
+      "docx": "sop+prompt/JCIIOT 2026 case 7 SOP.docx",
       "docx_sha256": "df637fcb1e558cbcacfc895d38b435008aa9eb15e1f85744631cea12b137e568",
-      "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_7_3fo3erfky9rn_scene_regenerated_semantic_map.json",
+      "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_7_3fo3erfky9rn_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "6fe9a3d6db6b0f8c2b1f055792f8f73a5a52a3d58d7de323a0fddb66b7d5656b",
-      "generated_sop": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/team_submission/generated_sops/generated_sop_l4.md",
+      "generated_sop": "team_submission/generated_sops/generated_sop_l4.md",
       "generated_sop_sha256": "acd431093c61e6daa5f6c63f7fecc3478e84db378c49cb7e507f1c8cf058b372",
       "checks": {
         "docx_exists": true,
@@ -146,11 +146,11 @@
         "white_tote_b01_left_front",
         "white_tote_b01_left_back"
       ],
-      "docx": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/sop+prompt/JCIIOT 2026 case 9 SOP.docx",
+      "docx": "sop+prompt/JCIIOT 2026 case 9 SOP.docx",
       "docx_sha256": "de1a3779d119a17031a17d4ca7812366b5bc1f6c66982617272aa66006b7e5ba",
-      "semantic_map": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json",
+      "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "652b8d6c64d9cc80c6a9430ec9d9a3cc657467e57a6a4117b03f9718f81d5279",
-      "generated_sop": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT/team_submission/generated_sops/generated_sop_l5.md",
+      "generated_sop": "team_submission/generated_sops/generated_sop_l5.md",
       "generated_sop_sha256": "d37bad2a7b7741bad7e4ac590cc08ff977445e269fcc64ccda602eeb5ce65ece",
       "checks": {
         "docx_exists": true,
