@@ -8,7 +8,7 @@
   },
   "version_control": {
     "runtime_baseline_commit": "4b9d7ed71d57e307d7a0bb3b41f55201704a466e",
-    "release_content_commit": null,
+    "release_content_commit": "31a9ad377a78479d2eae4c21e17af5833db227af",
     "release_content_commit_semantics": "Immutable pre-manifest-finalization commit containing all repaired submission content"
   },
   "official_reference": {

@@ -16,7 +16,7 @@ REPOSITORY_ROOT = ROOT.parent
 MANIFEST_PATH = ROOT / "team_submission" / "submission_manifest.json"
 EVIDENCE_INDEX_PATH = ROOT / "team_submission" / "evidence" / "EVIDENCE_INDEX.json"
 LFS_HEADER = b"version https://git-lfs.github.com/spec/v1"
-SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+COMMIT_SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 RUNTIME_PATHS = (
     "JCIIOT/src/robot_agent/skills",
     "JCIIOT/knowledge/robot_params.json",
@@ -87,7 +87,7 @@ def check_python_json(manifest: dict) -> list[str]:
         except Exception as exc:
             failures.append(f"invalid UTF-8 Python {path.relative_to(ROOT)}: {exc}")
     release_commit = manifest.get("version_control", {}).get("release_content_commit")
-    if not isinstance(release_commit, str) or not SHA256_PATTERN.fullmatch(release_commit):
+    if not isinstance(release_commit, str) or not COMMIT_SHA_PATTERN.fullmatch(release_commit):
         failures.append("manifest release_content_commit is not finalized")
     return failures
 
