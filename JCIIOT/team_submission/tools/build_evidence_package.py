@@ -101,6 +101,8 @@ are retained in `evidence_index.json`; packaged-copy hashes are recorded separat
 def build_package(output_path: Path = OUTPUT_PATH) -> None:
     manifest = read_json(MANIFEST_PATH)
     source_index = read_json(SOURCE_INDEX_PATH)
+    if manifest.get("level_results") != source_index.get("levels"):
+        raise RuntimeError("submission manifest and evidence index differ")
     package_index = {
         "schema_version": 1,
         "portable_copy": True,

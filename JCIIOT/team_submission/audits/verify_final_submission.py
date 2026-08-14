@@ -120,6 +120,8 @@ def _git_blob(commit: str, relative_to_root: str) -> bytes:
 def check_evidence(manifest: dict) -> list[str]:
     failures: list[str] = []
     index = read_json(EVIDENCE_INDEX_PATH)
+    if manifest.get("level_results") != index.get("levels"):
+        failures.append("manifest level_results differ from evidence index")
     baseline = manifest["version_control"]["runtime_baseline_commit"]
     total_score = 0
     total_elapsed = 0.0
@@ -242,7 +244,7 @@ def check_documents(manifest: dict) -> list[str]:
     failures: list[str] = []
     identity = manifest["identity"]
     official = manifest["official_reference"]
-    levels = read_json(EVIDENCE_INDEX_PATH)["levels"]
+    levels = manifest["level_results"]
     expected_by_document = {
         "README.md": [
             identity["team_name"], identity["participant_id"],

@@ -34,6 +34,83 @@
     "total_elapsed_sec": 267.76,
     "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json"
   },
+  "level_results": {
+    "L1": {
+      "environment": "FactorySorting1_3FO3ERFHISEM",
+      "score": 10,
+      "elapsed_sec": 39.584,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l1/model_epoch_20.pth",
+        "sha256": "1b13ed397d5d52141a9a32610dfc4a8829bdc6f4d5164f97ce9e5bd01f7e251e"
+      },
+      "evidence": {
+        "score": {"path": "team_submission/evidence/L1/score.json", "sha256": "b6ad1dd66c4b8747ec645fb950ef97da467309afd7b64f0679c42d414f58595a"},
+        "result": {"path": "team_submission/evidence/L1/result.json", "sha256": "0815cb84f7029d48e98f263daae8323ffd1c5a4a863c7a1f8df0c18d650db680"},
+        "trajectory": {"path": "team_submission/evidence/L1/trajectory.json", "sha256": "6b6ea958bf36699cf0afcc2c2248440659402166221a613fc4c1f0d516a197b1"}
+      }
+    },
+    "L2": {
+      "environment": "FactorySorting3_3FO3ERRPH7X9",
+      "score": 15,
+      "elapsed_sec": 39.549,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l2/model_epoch_50.pth",
+        "sha256": "9352d87f4c8ebbb81b3ccd63b09a2442fed4ec45f686121e1b91bb02c3ba1bbe"
+      },
+      "evidence": {
+        "score": {"path": "team_submission/evidence/L2/score.json", "sha256": "b2239a8c8c3de70f8e2c250a8f07906812a7ea2b78080a55d1971e2aebf66446"},
+        "result": {"path": "team_submission/evidence/L2/result.json", "sha256": "f3cae23f5502f45bee191b494e26a383bc90429ead6cf1a138625e9db5c5decd"},
+        "trajectory": {"path": "team_submission/evidence/L2/trajectory.json", "sha256": "bdc9f50cbfb5bda5965c9dffa652fb73b1655110c5a9ab5de6ef608090e19671"}
+      }
+    },
+    "L3": {
+      "environment": "FactorySorting5_3FO3ERTPXEUT",
+      "score": 20,
+      "elapsed_sec": 40.75,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l3/model_epoch_100.pth",
+        "sha256": "6052020c4cd75321d29dd9e108e9a0f4b34c3f7823e36831c2666a09bc074c52"
+      },
+      "evidence": {
+        "score": {"path": "team_submission/evidence/L3/score.json", "sha256": "1d5d9ff281f7cd25a29f26bcd23a5c5d0e26e869e776ff2b40ead4b7ce7c7a2b"},
+        "result": {"path": "team_submission/evidence/L3/result.json", "sha256": "76e30cd421f279716e114e4887db9fbc48427bac273d975453d117a3495081ee"},
+        "trajectory": {"path": "team_submission/evidence/L3/trajectory.json", "sha256": "b56b3a5e3c5ac5b4359dcf94e21f61c0ebaa082f5ec3e09f32d65fed34b5e786"}
+      }
+    },
+    "L4": {
+      "environment": "FactorySorting7_3FO3ERFKY9RN",
+      "score": 25,
+      "elapsed_sec": 49.415,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l4/model_epoch_50.pth",
+        "sha256": "0aa08fcea60ad6a79fd59632b0fda5101cfaac37d5b2a50fb6881a203419ef8f"
+      },
+      "evidence": {
+        "score": {"path": "team_submission/evidence/L4/score.json", "sha256": "575b6b3270de3c0a919dc8a6223378612be6cab2188b03dba8ee24da66eea929"},
+        "result": {"path": "team_submission/evidence/L4/result.json", "sha256": "f2fdf37779fc190cefc72502a4213d425f3abee5c391e3682c50e07f09b035b6"},
+        "trajectory": {"path": "team_submission/evidence/L4/trajectory.json", "sha256": "5ccb140091b533295d40d1094a9f65d1725ffc996bfea033bf86c297c7182376"}
+      }
+    },
+    "L5": {
+      "environment": "FactorySorting9_3FO3ERT2C5FP",
+      "score": 30,
+      "elapsed_sec": 98.462,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l5/model_epoch_100.pth",
+        "sha256": "f9c6f32cc7ff7d66bae08adb1bf0dfc0f6f36010db68e76723a6a10468bbea1f"
+      },
+      "evidence": {
+        "score": {"path": "team_submission/evidence/L5/score.json", "sha256": "1b662d26dcee5e25ccaf0050d8c537351e49874f8aa28cc22661692d3f965f1e"},
+        "result": {"path": "team_submission/evidence/L5/result.json", "sha256": "f9d7b7e2dfc5dbe1aa78ea139e5bf8a93cdc0927ae19107a110ec07568f3101e"},
+        "trajectory": {"path": "team_submission/evidence/L5/trajectory.json", "sha256": "88dfd37cacaede008cd6eb70db998af4124f4ad953bf9cbdfc232d7bdbc3fc82"}
+      }
+    }
+  },
   "models": {
     "official_baseline": {
       "path": "robosuite/robosuite/model_epoch_150.pth",
