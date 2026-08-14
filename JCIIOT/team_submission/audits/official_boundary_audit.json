@@ -1,8 +1,11 @@
 {
-  "generated_at": "2026-08-13T00:43:59.999676+00:00",
-  "reference_zip": "/private/tmp/JCIIOT2026_official_01032e8.zip",
-  "reference_zip_sha256": "66187865bfc559fb8bebb3fefb677e5443961312f83b99504dec710f5fabc066",
-  "current_root": "/Users/cjr/Documents/JCIIOT2026-master/JCIIOT",
+  "generated_at": "2026-08-14T12:18:55.888005+00:00",
+  "reference_repository": "https://github.com/JCIIOT2026/JCIIOT2026",
+  "reference_commit": "80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
+  "reference_archive_url": "https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
+  "reference_zip": "JCIIOT2026-80d8f9216b0716c6c7a20c19582b532ff1c9cdf2.zip",
+  "reference_zip_sha256": "d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a",
+  "current_root": ".",
   "protected_rules": {
     "prefixes": [
       "robosuite/",
@@ -17,8 +20,8 @@
   "summary": {
     "reference_files": 4972,
     "status_counts": {
-      "identical": 4971,
-      "lfs_materialized": 1
+      "identical": 4966,
+      "lfs_materialized": 6
     },
     "protected_extras": 258,
     "extra_counts": {
@@ -197,9 +200,11 @@
       "path": "robosuite/dataset/table_setup_from_dishwasher_sample.hdf5",
       "reference_size": 134,
       "reference_sha256": "393384254a3138f153bac194b8206cc32c18e44981c5b73c51e5df978078e9e6",
-      "current_size": 134,
-      "current_sha256": "393384254a3138f153bac194b8206cc32c18e44981c5b73c51e5df978078e9e6",
-      "status": "identical",
+      "current_size": 591069600,
+      "current_sha256": "e7f8fd98aa70ba5cea4cb5fec963d3534083b6d2fa9be7128fa33e9146f79eea",
+      "lfs_oid_sha256": "e7f8fd98aa70ba5cea4cb5fec963d3534083b6d2fa9be7128fa33e9146f79eea",
+      "lfs_size": 591069600,
+      "status": "lfs_materialized",
       "compliant": true
     },
     {
@@ -2593,10 +2598,10 @@
       "reference_sha256": "9d2730669eb73650095d57d6d85a10a01dddf5249afe3153cb267def81faebf2",
       "current_size": 139543773,
       "current_sha256": "ef5910f6a9f6309b5ced617762dffeb1169a8b0cfcea892d158e6b483252169f",
-      "status": "lfs_materialized",
-      "compliant": true,
       "lfs_oid_sha256": "ef5910f6a9f6309b5ced617762dffeb1169a8b0cfcea892d158e6b483252169f",
-      "lfs_size": 139543773
+      "lfs_size": 139543773,
+      "status": "lfs_materialized",
+      "compliant": true
     },
     {
       "path": "robosuite/robosuite/models/__init__.py",
@@ -31654,36 +31659,44 @@
       "path": "robosuite/robosuite/models/assets/objects/siemens/mujoco_original/meshes/parts/lowered_table_meshes_70cm_v2.zip",
       "reference_size": 131,
       "reference_sha256": "af196b2932e4934cbbc438233a8bc6e6f62f3085b6395c6f9d597454895bfe7a",
-      "current_size": 131,
-      "current_sha256": "af196b2932e4934cbbc438233a8bc6e6f62f3085b6395c6f9d597454895bfe7a",
-      "status": "identical",
+      "current_size": 448906,
+      "current_sha256": "b80479ee21b77c1d05c9f10dedc9fd999aad870f6bd4aac5a85076e4e8f7f8f9",
+      "lfs_oid_sha256": "b80479ee21b77c1d05c9f10dedc9fd999aad870f6bd4aac5a85076e4e8f7f8f9",
+      "lfs_size": 448906,
+      "status": "lfs_materialized",
       "compliant": true
     },
     {
       "path": "robosuite/robosuite/models/assets/objects/siemens/mujoco_original/meshes/parts/lowered_table_meshes_70cm_v3_fix_front_pillars.zip",
       "reference_size": 131,
       "reference_sha256": "79aeef373ece38c86586030e0772b5cc813de79ed56a3e2a60a5e62009ec7ec2",
-      "current_size": 131,
-      "current_sha256": "79aeef373ece38c86586030e0772b5cc813de79ed56a3e2a60a5e62009ec7ec2",
-      "status": "identical",
+      "current_size": 448637,
+      "current_sha256": "60feb57188bd342bf967e05dab7ac284a5a1dd2e38b2dd66809a605765b9bc1e",
+      "lfs_oid_sha256": "60feb57188bd342bf967e05dab7ac284a5a1dd2e38b2dd66809a605765b9bc1e",
+      "lfs_size": 448637,
+      "status": "lfs_materialized",
       "compliant": true
     },
     {
       "path": "robosuite/robosuite/models/assets/objects/siemens/mujoco_original/meshes/parts/lowered_table_meshes_70cm_v4_shorten_front_legs.zip",
       "reference_size": 131,
       "reference_sha256": "2e817a57505975fcfcbc667931fcf3ffd390b239d6db4b8774e7a4fbf51eeb58",
-      "current_size": 131,
-      "current_sha256": "2e817a57505975fcfcbc667931fcf3ffd390b239d6db4b8774e7a4fbf51eeb58",
-      "status": "identical",
+      "current_size": 667273,
+      "current_sha256": "e9fff5ffbb75cd859cf67593374fd25ca556bf6e3e81b8ef9d902137986dcdf1",
+      "lfs_oid_sha256": "e9fff5ffbb75cd859cf67593374fd25ca556bf6e3e81b8ef9d902137986dcdf1",
+      "lfs_size": 667273,
+      "status": "lfs_materialized",
       "compliant": true
     },
     {
       "path": "robosuite/robosuite/models/assets/objects/siemens/mujoco_original/meshes/parts/lowered_table_meshes_70cm_v5_piecewise_front_supports.zip",
       "reference_size": 131,
       "reference_sha256": "f3dcf3b4aa8eb82feedef1a1a5dd4a3a7adbfee1dd119fb7df542ad8ee974320",
-      "current_size": 131,
-      "current_sha256": "f3dcf3b4aa8eb82feedef1a1a5dd4a3a7adbfee1dd119fb7df542ad8ee974320",
-      "status": "identical",
+      "current_size": 667263,
+      "current_sha256": "18249745eac09d239e80349f8bd7cb9cd8a274706b30aee852b6807ab9a15c8c",
+      "lfs_oid_sha256": "18249745eac09d239e80349f8bd7cb9cd8a274706b30aee852b6807ab9a15c8c",
+      "lfs_size": 667263,
+      "status": "lfs_materialized",
       "compliant": true
     },
     {
@@ -46369,8 +46382,8 @@
     },
     {
       "path": "robosuite/robosuite/utils/__pycache__/binding_utils.cpython-311.pyc",
-      "size": 58080,
-      "sha256": "c3918163713d3623606de7a45d3c05791933e9b880a420a70aa8e540ec2f7919",
+      "size": 58072,
+      "sha256": "917b22825bdbdda424db6c67d7e7834686119268edecde51ec3e444b2a79ec59",
       "classification": "runtime_cache",
       "compliant": true,
       "submission_action": "exclude"

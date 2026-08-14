@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "team_name": "CI Lab",
+    "participant_id": "doukeke",
+    "repository_url": "https://github.com/qkldoukeke/JCIIOT2026-final-submission",
+    "leaderboard_issue_url": "https://github.com/JCIIOT2026/JCIIOT2026/issues/13"
+  },
+  "version_control": {
+    "runtime_baseline_commit": "4b9d7ed71d57e307d7a0bb3b41f55201704a466e",
+    "release_content_commit": null,
+    "release_content_commit_semantics": "Immutable pre-manifest-finalization commit containing all repaired submission content"
+  },
+  "official_reference": {
+    "repository_url": "https://github.com/JCIIOT2026/JCIIOT2026",
+    "commit": "80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
+    "archive_url": "https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
+    "archive_sha256": "d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a",
+    "audit_time_utc": "2026-08-14T12:18:55.888005+00:00",
+    "protected_summary": {
+      "reference_files": 4972,
+      "ordinary_identical": 4966,
+      "lfs_pointer_intact": 0,
+      "lfs_materialized": 6,
+      "lfs_unavailable": 0,
+      "modified": 0,
+      "missing": 0,
+      "violations": 0
+    }
+  },
+  "result_summary": {
+    "score": 100,
+    "max_score": 100,
+    "total_elapsed_sec": 267.76,
+    "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json"
+  },
+  "models": {
+    "official_baseline": {
+      "path": "robosuite/robosuite/model_epoch_150.pth",
+      "size": 139543773,
+      "sha256": "ef5910f6a9f6309b5ced617762dffeb1169a8b0cfcea892d158e6b483252169f"
+    },
+    "L1": {
+      "path": "team_submission/models/final/l1/model_epoch_20.pth",
+      "size": 139519676,
+      "sha256": "1b13ed397d5d52141a9a32610dfc4a8829bdc6f4d5164f97ce9e5bd01f7e251e"
+    },
+    "L2": {
+      "path": "team_submission/models/final/l2/model_epoch_50.pth",
+      "size": 139543066,
+      "sha256": "9352d87f4c8ebbb81b3ccd63b09a2442fed4ec45f686121e1b91bb02c3ba1bbe"
+    },
+    "L3": {
+      "path": "team_submission/models/final/l3/model_epoch_100.pth",
+      "size": 139543517,
+      "sha256": "6052020c4cd75321d29dd9e108e9a0f4b34c3f7823e36831c2666a09bc074c52"
+    },
+    "L4": {
+      "path": "team_submission/models/final/l4/model_epoch_50.pth",
+      "size": 139543066,
+      "sha256": "0aa08fcea60ad6a79fd59632b0fda5101cfaac37d5b2a50fb6881a203419ef8f"
+    },
+    "L5": {
+      "path": "team_submission/models/final/l5/model_epoch_100.pth",
+      "size": 4901219,
+      "sha256": "f9c6f32cc7ff7d66bae08adb1bf0dfc0f6f36010db68e76723a6a10468bbea1f"
+    }
+  },
+  "task_routing": {
+    "FactorySorting1_3FO3ERFHISEM": "team_submission/models/final/l1/model_epoch_20.pth",
+    "FactorySorting3_3FO3ERRPH7X9": "team_submission/models/final/l2/model_epoch_50.pth",
+    "FactorySorting5_3FO3ERTPXEUT": "team_submission/models/final/l3/model_epoch_100.pth",
+    "FactorySorting7_3FO3ERFKY9RN": "team_submission/models/final/l4/model_epoch_50.pth",
+    "FactorySorting9_3FO3ERT2C5FP": "team_submission/models/final/l5/model_epoch_100.pth"
+  },
+  "grasp_router": "scripted_first_with_bc_recovery",
+  "known_compliance_risks": [
+    "Organizer-protected source passes the fixed-reference audit.",
+    "Skill-layer programmed grasp uses public simulation helper interfaces; the permitted interface boundary remains pending written organizer clarification."
+  ],
+  "training_reproducibility": {
+    "inference_reproducible": true,
+    "training_data_in_repository": false,
+    "data_manifest": "team_submission/TRAINING_DATA_MANIFEST.md"
+  }
+}

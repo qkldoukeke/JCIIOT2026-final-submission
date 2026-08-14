@@ -28,6 +28,13 @@ PROTECTED_PREFIXES = (
     "src/robot_agent/environments/",
 )
 
+OFFICIAL_REPOSITORY = "https://github.com/JCIIOT2026/JCIIOT2026"
+OFFICIAL_COMMIT = "80d8f9216b0716c6c7a20c19582b532ff1c9cdf2"
+OFFICIAL_ARCHIVE_URL = (
+    "https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/"
+    + OFFICIAL_COMMIT
+)
+
 
 def is_protected(relative_path: str) -> bool:
     path = relative_path.replace("\\", "/")
@@ -83,7 +90,14 @@ def reference_prefix(archive: zipfile.ZipFile) -> str:
     return candidates.pop() + "JCIIOT/"
 
 
-def audit(reference_zip: Path, current_root: Path) -> dict[str, object]:
+def audit(
+    reference_zip: Path,
+    current_root: Path,
+    *,
+    reference_repository: str,
+    reference_commit: str,
+    reference_archive_url: str,
+) -> dict[str, object]:
     records: list[dict[str, object]] = []
     extras: list[dict[str, object]] = []
 
@@ -124,23 +138,28 @@ def audit(reference_zip: Path, current_root: Path) -> dict[str, object]:
                 current_size=current_size,
                 current_sha256=current_sha,
             )
-            if current_size == entry.file_size and current_sha == reference_sha:
-                record.update(status="identical", compliant=True)
-            else:
-                pointer = parse_lfs_pointer(reference_data)
-                if (
-                    pointer
-                    and current_size == pointer["size"]
+            pointer = parse_lfs_pointer(reference_data)
+            if pointer:
+                record.update(
+                    lfs_oid_sha256=pointer["sha256"],
+                    lfs_size=pointer["size"],
+                )
+                if current_size == entry.file_size and current_sha == reference_sha:
+                    record.update(status="lfs_pointer_intact", compliant=True)
+                elif (
+                    current_size == pointer["size"]
                     and current_sha == pointer["sha256"]
                 ):
                     record.update(
                         status="lfs_materialized",
                         compliant=True,
-                        lfs_oid_sha256=pointer["sha256"],
-                        lfs_size=pointer["size"],
                     )
                 else:
                     record.update(status="modified", compliant=False)
+            elif current_size == entry.file_size and current_sha == reference_sha:
+                record.update(status="identical", compliant=True)
+            else:
+                record.update(status="modified", compliant=False)
             records.append(record)
 
         for relative_path in sorted(set(current_files) - set(reference_entries)):
@@ -169,9 +188,12 @@ def audit(reference_zip: Path, current_root: Path) -> dict[str, object]:
     violations = [record for record in records + extras if not record["compliant"]]
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "reference_zip": str(reference_zip.resolve()),
+        "reference_repository": reference_repository,
+        "reference_commit": reference_commit,
+        "reference_archive_url": reference_archive_url,
+        "reference_zip": reference_zip.name,
         "reference_zip_sha256": sha256_file(reference_zip),
-        "current_root": str(current_root.resolve()),
+        "current_root": ".",
         "protected_rules": {
             "prefixes": list(PROTECTED_PREFIXES),
             "exact_paths": sorted(PROTECTED_EXACT),
@@ -199,11 +221,17 @@ def markdown_summary(report: dict[str, object]) -> str:
         "# 主办方维护边界审计",
         "",
         f"- 结论：**{compliant}**",
+        f"- 主办方仓库：`{report['reference_repository']}`",
+        f"- 固定提交：`{report['reference_commit']}`",
+        f"- 官方归档 URL：`{report['reference_archive_url']}`",
+        f"- 审计时间（UTC）：`{report['generated_at']}`",
         f"- 参考 ZIP：`{report['reference_zip']}`",
         f"- 参考 ZIP SHA-256：`{report['reference_zip_sha256']}`",
         f"- 受保护参考文件：`{summary['reference_files']}`",
         f"- 逐字节一致：`{statuses.get('identical', 0)}`",
+        f"- Git LFS 指针一致：`{statuses.get('lfs_pointer_intact', 0)}`",
         f"- Git LFS 正确实体化：`{statuses.get('lfs_materialized', 0)}`",
+        f"- Git LFS 对象无法取得：`{statuses.get('lfs_object_unavailable', 0)}`",
         f"- 修改：`{statuses.get('modified', 0)}`",
         f"- 缺失：`{statuses.get('missing', 0)}`",
         f"- 违规项：`{summary['violations']}`",
@@ -228,8 +256,11 @@ def main() -> int:
     parser.add_argument(
         "--reference-zip",
         type=Path,
-        default=project_root.parents[2] / "JCIIOT2026-master.zip",
+        required=True,
     )
+    parser.add_argument("--reference-repository", default=OFFICIAL_REPOSITORY)
+    parser.add_argument("--reference-commit", default=OFFICIAL_COMMIT)
+    parser.add_argument("--reference-archive-url", default=OFFICIAL_ARCHIVE_URL)
     parser.add_argument("--current-root", type=Path, default=project_root)
     parser.add_argument(
         "--output",
@@ -238,7 +269,13 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    report = audit(args.reference_zip, args.current_root)
+    report = audit(
+        args.reference_zip,
+        args.current_root,
+        reference_repository=args.reference_repository,
+        reference_commit=args.reference_commit,
+        reference_archive_url=args.reference_archive_url,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",

@@ -1,11 +1,17 @@
 # 主办方维护边界审计
 
 - 结论：**通过**
-- 参考 ZIP：`/private/tmp/JCIIOT2026_official_01032e8.zip`
-- 参考 ZIP SHA-256：`66187865bfc559fb8bebb3fefb677e5443961312f83b99504dec710f5fabc066`
+- 主办方仓库：`https://github.com/JCIIOT2026/JCIIOT2026`
+- 固定提交：`80d8f9216b0716c6c7a20c19582b532ff1c9cdf2`
+- 官方归档 URL：`https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/80d8f9216b0716c6c7a20c19582b532ff1c9cdf2`
+- 审计时间（UTC）：`2026-08-14T12:18:55.888005+00:00`
+- 参考 ZIP：`JCIIOT2026-80d8f9216b0716c6c7a20c19582b532ff1c9cdf2.zip`
+- 参考 ZIP SHA-256：`d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a`
 - 受保护参考文件：`4972`
-- 逐字节一致：`4971`
-- Git LFS 正确实体化：`1`
+- 逐字节一致：`4966`
+- Git LFS 指针一致：`0`
+- Git LFS 正确实体化：`6`
+- Git LFS 对象无法取得：`0`
 - 修改：`0`
 - 缺失：`0`
 - 违规项：`0`

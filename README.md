@@ -1,49 +1,58 @@
-## Notice
-An erratum for the  SOP materials is available in [ERRATUM.md](./ERRATUM.md). Please refer to it for the latest corrections and clarifications.
+# JCIIOT 2026 最终提交：CI Lab
 
-## Team Final Submission
+本仓库是 CI Lab（参赛 ID：`doukeke`）的 JCIIOT 2026 工业具身智能挑战赛最终提交。
 
-- **Code repository:** [https://github.com/qkldoukeke/JCIIOT2026-final-submission](https://github.com/qkldoukeke/JCIIOT2026-final-submission)
+- 代码仓库：<https://github.com/qkldoukeke/JCIIOT2026-final-submission>
+- 排行榜提交：<https://github.com/JCIIOT2026/JCIIOT2026/issues/13>
+- 机器可读提交清单：`JCIIOT/team_submission/submission_manifest.json`
+- 五题原始证据索引：`JCIIOT/team_submission/evidence/EVIDENCE_INDEX.json`
+
+## 最终结果
+
+以下结果由本地官方 App 评分流程生成，正式成绩仍以主办方复现为准。
+
+| Level | Score | Time | Environment |
+|---|---:|---:|---|
+| L1 | 10/10 | 39.584 s | `FactorySorting1_3FO3ERFHISEM` |
+| L2 | 15/15 | 39.549 s | `FactorySorting3_3FO3ERRPH7X9` |
+| L3 | 20/20 | 40.750 s | `FactorySorting5_3FO3ERTPXEUT` |
+| L4 | 25/25 | 49.415 s | `FactorySorting7_3FO3ERFKY9RN` |
+| L5 | 30/30 | 98.462 s | `FactorySorting9_3FO3ERT2C5FP` |
+| Total | **100/100** | **267.760 s** | L1–L5 |
+
+每题的 `score.json`、`result.json` 和 `trajectory.json` 均保存在 `JCIIOT/team_submission/evidence/`，并使用 SHA-256 固定。
+
+## 获取代码与模型
+
+不要使用 GitHub 网页的 **Download ZIP** 取得运行代码，因为 GitHub 源码 ZIP 只包含 Git LFS 指针，不能直接加载模型。请使用：
+
+```powershell
+git lfs install
+git clone https://github.com/qkldoukeke/JCIIOT2026-final-submission.git
+Set-Location .\JCIIOT2026-final-submission
+git lfs pull
+```
+
+然后按 [复现指南](./复现指南.md) 配置环境并进入 `JCIIOT/` 启动官方 `app.py`。
+
+## 技术材料
+
 - [技术报告](./技术报告.md)
 - [复现指南](./复现指南.md)
 - [新颖性声明](./新颖性声明.md)
 - [提交合规说明](./提交合规说明.md)
+- [实验开发日志](./实验开发日志.md)
 - [最终提交清单](./最终提交清单.md)
-- [排行榜提交草稿](./排行榜提交草稿.md)
 
-## Repository Structure and Leaderboard
+## 固定官方基准
 
-- The **Competition Description** section contains the problem statement and task description for this competition.
+- 主办方仓库：<https://github.com/JCIIOT2026/JCIIOT2026>
+- 固定提交：`80d8f9216b0716c6c7a20c19582b532ff1c9cdf2`
+- 官方归档 SHA-256：`d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a`
+- 边界审计：4,966 个普通文件逐字节一致，6 个官方 LFS 对象正确实体化，修改 0、缺失 0、违规 0。
 
-- The **JCIIOT** folder contains the related code and final model assets.
+## 合规边界声明
 
+主办方禁止修改的源码已通过上述固定基准审计。当前运行逻辑保持五题满分版本不变；`skills/` 内程序化抓取对仿真公开辅助接口的使用方式，仍待主办方对接口边界进行书面确认。因此本提交不宣称已经消除所有接口解释风险。
 
-
-
----
-
-## Leaderboard
-
-
-
-> **Disclaimer:** All scores listed below are self-reported by participants, include only subjective evaluation scores, and do not include objective evaluation scores. They are shown for reference only and have not been officially verified or reproduced.
-
-| Rank | Participant / Team | Score   | Date | Method Summary | Code / Repository | Evidence |
-|------|--------------------|---------|------|----------------|-------------------|----------|
-| 1    | SOP-MapGuard           | 100/100 | 2026-07-21 | N/A  | N/A | N/A      |
-
----
-
-## How to Submit to the Leaderboard
-
-Please open a GitHub issue using the **Leaderboard Submission** template and include:
-
-- Name 
-- Team Name (optional)
-- Current Score
-- Date
-- Method Summary (optional)
-- Key Idea / Innovation (optional)
-- Result Evidence
-- Repository / Code Link (optional)
-- Additional Notes
+训练配置已经改为从 `JCIIOT/` 根目录解析的相对路径，但训练 HDF5 未随 GitHub 提交。最终推理可复现；从头训练只有在另行取得训练数据清单中的 HDF5 后才可复现。

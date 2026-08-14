@@ -40,10 +40,10 @@
   "train": {
     "data": [
       {
-        "path": "D:\\project\\JCIIOT2026-master\\JCIIOT2026-master\\JCIIOT\\team_submission\\training_data\\factory_sorting_l5_center_clean_25_timestep_key_windows_train.hdf5"
+        "path": "team_submission/training_data/factory_sorting_l5_center_clean_25_timestep_key_windows_train.hdf5"
       }
     ],
-    "output_dir": "D:\\project\\JCIIOT2026-master\\JCIIOT2026-master\\JCIIOT\\team_submission\\training_outputs",
+    "output_dir": "team_submission/training_outputs",
     "normalize_weights_by_ds_size": false,
     "num_data_workers": 0,
     "hdf5_cache_mode": "low_dim",
