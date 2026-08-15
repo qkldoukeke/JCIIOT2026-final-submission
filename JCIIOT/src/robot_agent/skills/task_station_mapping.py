@@ -41,10 +41,30 @@ def _station_token(value: Any) -> str | None:
     return match.group(1) if match else None
 
 
-def _runtime_task(backend) -> dict[str, Any] | None:
-    """Return the unique task matching the backend environment, if available."""
-    env_name = str(getattr(backend, "_env_name", "") or "")
-    if not env_name or not _TASK_CONFIG_PATH.exists():
+def _environment_key(value: Any) -> str:
+    key = re.sub(r"[^a-z0-9]", "", str(value or "").casefold())
+    return key.removesuffix("sceneregenerated")
+
+
+def _runtime_task(scene_context) -> dict[str, Any] | None:
+    """Return the task matching the immutable semantic scene snapshot.
+
+    The skill layer deliberately derives task identity from ``SceneContext``
+    instead of reading the concrete backend's private ``_env_name`` field.
+    """
+    scene_name = str(getattr(scene_context, "scene_name", "") or "")
+    map_name = str(getattr(scene_context, "map_name", "") or "")
+    raw_identifiers = {
+        value.casefold()
+        for value in (
+            scene_name,
+            map_name,
+            map_name.removesuffix("_scene_regenerated"),
+        )
+        if value
+    }
+    identifiers = {_environment_key(value) for value in raw_identifiers}
+    if not identifiers or not _TASK_CONFIG_PATH.exists():
         return None
 
     try:
@@ -57,19 +77,19 @@ def _runtime_task(backend) -> dict[str, Any] | None:
         task
         for task in catalog.get("tasks", [])
         if isinstance(task, dict)
-        and str(task.get("env_name") or "") == env_name
+        and _environment_key(task.get("env_name")) in identifiers
     ]
     if len(matches) != 1:
         logger.warning(
             "runtime task mapping is not unique for env=%s: matches=%d",
-            env_name,
+            "/".join(sorted(raw_identifiers)),
             len(matches),
         )
         return None
     return matches[0]
 
 
-def configured_task(backend) -> dict[str, Any] | None:
+def configured_task(scene_context) -> dict[str, Any] | None:
     """Return a defensive copy of the active task's authoritative metadata.
 
     Skill implementations may need more than the source / target station id
@@ -77,13 +97,13 @@ def configured_task(backend) -> dict[str, Any] | None:
     lookup centralized here so skills never embed a level name, scene name, or
     object name of their own.
     """
-    task = _runtime_task(backend)
+    task = _runtime_task(scene_context)
     return dict(task) if task is not None else None
 
 
-def configured_task_objects(backend) -> list[str]:
+def configured_task_objects(scene_context) -> list[str]:
     """Return the active task's ordered object names."""
-    task = _runtime_task(backend)
+    task = _runtime_task(scene_context)
     if task is None:
         return []
     value = task.get("object")
@@ -95,11 +115,32 @@ def configured_task_objects(backend) -> list[str]:
     return []
 
 
-def configured_station_for_role(backend, role: str) -> str | None:
+def safety_ordered_objects(object_names: list[str]) -> list[str]:
+    """Order a multi-object rack rear-first using catalog name semantics.
+
+    Membership remains fully controlled by the immutable task catalog.  This
+    changes only scheduling and embeds neither a level-specific identifier nor
+    a world coordinate.
+    """
+    priority = {"back": 0, "center": 1, "front": 2}
+
+    def rank(item: tuple[int, str]) -> tuple[int, int]:
+        index, name = item
+        tokens = str(name).casefold().replace("-", "_").split("_")
+        semantic_rank = min(
+            (priority[token] for token in tokens if token in priority),
+            default=3,
+        )
+        return semantic_rank, index
+
+    return [name for _, name in sorted(enumerate(object_names), key=rank)]
+
+
+def configured_station_for_role(scene_context, role: str) -> str | None:
     """Return the configured source or target for the current environment."""
     if role not in {"source", "target"}:
         raise ValueError("role must be 'source' or 'target'")
-    task = _runtime_task(backend)
+    task = _runtime_task(scene_context)
     if task is None:
         return None
     station = str(task.get(role) or "").strip()
@@ -107,7 +148,7 @@ def configured_station_for_role(backend, role: str) -> str | None:
 
 
 def resolve_configured_station(
-    backend,
+    scene_context,
     requested: Any,
     *,
     role: str | None = None,
@@ -124,11 +165,11 @@ def resolve_configured_station(
     if inferred_role is not None and inferred_role != resolved_role:
         return requested_text, None
 
-    task = _runtime_task(backend)
+    task = _runtime_task(scene_context)
     if task is None:
         return requested_text, None
 
-    configured = configured_station_for_role(backend, resolved_role)
+    configured = configured_station_for_role(scene_context, resolved_role)
     if not configured:
         return requested_text, None
 

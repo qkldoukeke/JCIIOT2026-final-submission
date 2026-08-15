@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-08-11T10:38:57",
+  "updated_at": "2026-08-15T21:59:54",
   "document_count": 2,
   "documents": {
     "current_generated_sop.md": {
-      "title": "L1 Current Team SOP",
+      "title": "L5 Current Team SOP",
       "category": "sop",
       "tags": [
-        "L1",
+        "L5",
         "current",
         "team-generated",
         "SOP"

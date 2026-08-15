@@ -1,0 +1,1135 @@
+{
+  "task": "Move the three white-rimmed storage bins from Pick Station 6 to Place Station 1.",
+  "task_index": 4,
+  "env_name": "FactorySorting9_3FO3ERT2C5FP",
+  "status": "OK",
+  "success": true,
+  "trajectory": "recordings/FactorySorting9_3FO3ERT2C5FP/trajectory_20260815_215947_OK.json",
+  "running_trajectory": "recordings/FactorySorting9_3FO3ERT2C5FP/trajectory_20260815_215947_RUNNING.json",
+  "result": {
+    "skill_name": "composed",
+    "success": true,
+    "message": "该计划依次搬运三个白色储物箱，每个箱子执行标准的 move → pick_up → move → place_down 流程，确保每次只搬运一个物体，并遵循所有安全约束。",
+    "steps": [
+      {
+        "skill": "move",
+        "description": "导航至取货工位 input_1 的接近点",
+        "success": true,
+        "message": "Moved to: input_1",
+        "payload": {
+          "action": "move",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "source_egress": null,
+          "goal_xy": [
+            -13.1,
+            5.01
+          ],
+          "start_base_pose": {
+            "xy": [
+              13.5,
+              0.0
+            ],
+            "yaw": 3.1415927410125732,
+            "robot_base_pos": [
+              13.5,
+              0.0,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              3.1415927410125732
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              -13.099995300982528,
+              4.999998446093375
+            ],
+            "yaw": -3.140955686569214,
+            "robot_base_pos": [
+              -13.099995300982528,
+              4.999998446093375,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.140955686569214
+            ]
+          },
+          "waypoints": 94,
+          "path_length_m": 34.491809527296745,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_center"
+        },
+        "preconditions": [
+          "底盘静止于起始位置"
+        ],
+        "expected_output": "机器人到达 input_1 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "pick_up",
+        "description": "抓取第一个物体 white_tote_b01_left_center",
+        "success": true,
+        "message": "Physics grasp OK: input_1",
+        "payload": {
+          "action": "pick_up",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "object_name": "white_tote_b01_left_back",
+          "requested_object_name": "white_tote_b01_left_center",
+          "object_safety_correction": {
+            "requested_object": "white_tote_b01_left_center",
+            "resolved_object": "white_tote_b01_left_back",
+            "reason": "rear-first multi-object safety schedule",
+            "remaining_order": [
+              "white_tote_b01_left_back",
+              "white_tote_b01_left_center",
+              "white_tote_b01_left_front"
+            ]
+          },
+          "grasp_alignment": {
+            "xy": [
+              -13.1,
+              5.01
+            ],
+            "yaw": -3.14,
+            "robot_base_pos": [
+              -13.1,
+              5.01,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.14
+            ],
+            "current_xy": [
+              -13.099995300982528,
+              4.999998446093375
+            ],
+            "current_yaw": -3.140955686569214,
+            "object_name": "white_tote_b01_left_back",
+            "station_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "position_source": "semantic-map input_1.approach",
+            "yaw_source": "knowledge/task_config.json grasp_poses.input_1.yaw",
+            "formula": "semantic station approach + configured/semantic station yaw"
+          },
+          "checkpoint_selection": {
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "checkpoint": "team_submission/models/final/l5/model_epoch_100.pth",
+            "task_specific": true
+          },
+          "method": "envbackend_physics",
+          "ok": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_center",
+          "grasp_initial_base_pose": {
+            "xy": [
+              -13.099995300982528,
+              4.999998446093375
+            ],
+            "yaw": -3.140955686569214,
+            "robot_base_pos": [
+              -13.099995300982528,
+              4.999998446093375,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.140955686569214
+            ]
+          }
+        },
+        "preconditions": [
+          "夹爪为空",
+          "底盘已停稳"
+        ],
+        "expected_output": "成功抓取物体并提升至安全高度",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "携带物体导航至放置工位 output_6",
+        "success": true,
+        "message": "Moved to: aux_output_1",
+        "payload": {
+          "action": "move",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "source_egress": {
+            "source": "input_1",
+            "held_object": "white_tote_b01_left_back",
+            "start_xy": [
+              -13.733043916037202,
+              5.522461671659737
+            ],
+            "source_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "source_approach_xy": [
+              -13.1,
+              5.01
+            ],
+            "outward_unit_xy": [
+              1.0,
+              0.0
+            ],
+            "rejected_egress_xy": [
+              -13.133043916037202,
+              5.522461671659737
+            ],
+            "egress_distance_m": 0.6,
+            "method": "a_star_fallback_blocked_straight_egress"
+          },
+          "goal_xy": [
+            0.11,
+            7.55
+          ],
+          "start_base_pose": {
+            "xy": [
+              -13.733043916037202,
+              5.522461671659737
+            ],
+            "yaw": -3.140747547149658,
+            "robot_base_pos": [
+              -13.733043916037202,
+              5.522461671659737,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.140747547149658
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              0.10002724031254082,
+              7.5499932859458285
+            ],
+            "yaw": -3.1388444900512695,
+            "robot_base_pos": [
+              0.10002724031254082,
+              7.5499932859458285,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1388444900512695
+            ]
+          },
+          "waypoints": 40,
+          "path_length_m": 14.489277619442369,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "夹爪已持握物体"
+        ],
+        "expected_output": "机器人到达 output_6 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "place_down",
+        "description": "在 output_6 放下物体",
+        "success": true,
+        "message": "Physics place OK: aux_output_1",
+        "payload": {
+          "action": "place_down",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "method": "envbackend_physics",
+          "safe_approach": {
+            "applied": true,
+            "target": "aux_output_1",
+            "reason": "semantic_staging_then_backend_turn",
+            "attachment_radius_m": 0.65,
+            "center_to_approach_m": 0.9236260065632635,
+            "turn_angle_rad": 1.6103642455608629,
+            "approach_xy": [
+              0.6576713280388237,
+              7.529825758230422
+            ],
+            "retreat_distance_m": 0.8,
+            "staging_xy": [
+              0.6282221789170823,
+              6.73036797471962
+            ],
+            "final_xy": [
+              0.6576978737245006,
+              7.529785446679877
+            ],
+            "final_yaw": -3.1389083862304688
+          },
+          "multi_object_slot": {
+            "applied": true,
+            "target": "aux_output_1",
+            "object_name": "white_tote_b01_left_back",
+            "reason": "dynamic_semantic_table_slot",
+            "object_index": 2,
+            "object_count": 3,
+            "slot_multiplier": 1,
+            "slot_spacing_m": 0.5480427753257826,
+            "offset_from_target_center_m": 0.5480427753257826,
+            "center_xy": [
+              0.6916713280388237,
+              8.452825758230423
+            ],
+            "approach_xy": [
+              0.6576713280388237,
+              7.529825758230422
+            ],
+            "semantic_target_center_xy": [
+              0.144,
+              8.473
+            ],
+            "semantic_target_size_xy": [
+              1.683,
+              0.836
+            ],
+            "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json"
+          },
+          "semantic_station_override": {
+            "center": [
+              0.6916713280388237,
+              8.452825758230423
+            ],
+            "approach": [
+              0.6576713280388237,
+              7.529825758230422
+            ],
+            "kind": "table",
+            "index": 0
+          },
+          "ok": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "底盘已停稳于放置点"
+        ],
+        "expected_output": "物体放置成功，夹爪释放并收回",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "返回取货工位 input_1 的接近点",
+        "success": true,
+        "message": "Moved to: input_1",
+        "payload": {
+          "action": "move",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "source_egress": null,
+          "goal_xy": [
+            -13.1,
+            5.01
+          ],
+          "start_base_pose": {
+            "xy": [
+              0.657600153431026,
+              7.529401436181819
+            ],
+            "yaw": 1.5338294506072998,
+            "robot_base_pos": [
+              0.657600153431026,
+              7.529401436181819,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.5338294506072998
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              -13.100003300643184,
+              4.9999949408515505
+            ],
+            "yaw": 1.5286941528320312,
+            "robot_base_pos": [
+              -13.100003300643184,
+              4.9999949408515505,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.5286941528320312
+            ]
+          },
+          "waypoints": 41,
+          "path_length_m": 14.938098846706303,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_center"
+        },
+        "preconditions": [
+          "夹爪为空"
+        ],
+        "expected_output": "机器人到达 input_1 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "pick_up",
+        "description": "抓取第二个物体 white_tote_b01_left_front",
+        "success": true,
+        "message": "Physics grasp OK: input_1",
+        "payload": {
+          "action": "pick_up",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "object_name": "white_tote_b01_left_center",
+          "requested_object_name": "white_tote_b01_left_front",
+          "object_safety_correction": {
+            "requested_object": "white_tote_b01_left_front",
+            "resolved_object": "white_tote_b01_left_center",
+            "reason": "rear-first multi-object safety schedule",
+            "remaining_order": [
+              "white_tote_b01_left_center",
+              "white_tote_b01_left_front"
+            ]
+          },
+          "grasp_alignment": {
+            "xy": [
+              -13.1,
+              5.01
+            ],
+            "yaw": -3.14,
+            "robot_base_pos": [
+              -13.1,
+              5.01,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.14
+            ],
+            "current_xy": [
+              -13.100003300643184,
+              4.9999949408515505
+            ],
+            "current_yaw": 1.5286941528320312,
+            "object_name": "white_tote_b01_left_center",
+            "station_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "position_source": "semantic-map input_1.approach",
+            "yaw_source": "knowledge/task_config.json grasp_poses.input_1.yaw",
+            "formula": "semantic station approach + configured/semantic station yaw"
+          },
+          "checkpoint_selection": {
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "checkpoint": "team_submission/models/final/l5/model_epoch_100.pth",
+            "task_specific": true
+          },
+          "method": "envbackend_physics",
+          "ok": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_front",
+          "grasp_initial_base_pose": {
+            "xy": [
+              -13.100003300643184,
+              4.9999949408515505
+            ],
+            "yaw": 1.5286941528320312,
+            "robot_base_pos": [
+              -13.100003300643184,
+              4.9999949408515505,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.5286941528320312
+            ]
+          }
+        },
+        "preconditions": [
+          "夹爪为空",
+          "底盘已停稳"
+        ],
+        "expected_output": "成功抓取物体并提升至安全高度",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "携带物体导航至放置工位 output_6",
+        "success": true,
+        "message": "Moved to: aux_output_1",
+        "payload": {
+          "action": "move",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "source_egress": {
+            "source": "input_1",
+            "held_object": "white_tote_b01_left_center",
+            "start_xy": [
+              -13.733051703340616,
+              4.956198825658333
+            ],
+            "source_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "source_approach_xy": [
+              -13.1,
+              5.01
+            ],
+            "outward_unit_xy": [
+              1.0,
+              0.0
+            ],
+            "rejected_egress_xy": [
+              -13.133051703340616,
+              4.956198825658333
+            ],
+            "egress_distance_m": 0.6,
+            "method": "a_star_fallback_blocked_straight_egress"
+          },
+          "goal_xy": [
+            0.11,
+            7.55
+          ],
+          "start_base_pose": {
+            "xy": [
+              -13.733051703340616,
+              4.956198825658333
+            ],
+            "yaw": -3.1399996280670166,
+            "robot_base_pos": [
+              -13.733051703340616,
+              4.956198825658333,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1399996280670166
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              0.10002889570917042,
+              7.549991580115462
+            ],
+            "yaw": -3.137808084487915,
+            "robot_base_pos": [
+              0.10002889570917042,
+              7.549991580115462,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.137808084487915
+            ]
+          },
+          "waypoints": 41,
+          "path_length_m": 14.753944499791674,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "夹爪已持握物体"
+        ],
+        "expected_output": "机器人到达 output_6 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "place_down",
+        "description": "在 output_6 放下物体",
+        "success": true,
+        "message": "Physics place OK: aux_output_1",
+        "payload": {
+          "action": "place_down",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "method": "envbackend_physics",
+          "safe_approach": {
+            "applied": true,
+            "target": "aux_output_1",
+            "reason": "semantic_staging_then_backend_turn",
+            "attachment_radius_m": 0.65,
+            "center_to_approach_m": 0.9236260065632635,
+            "turn_angle_rad": 1.6114006511242174,
+            "approach_xy": [
+              0.11,
+              7.55
+            ],
+            "retreat_distance_m": 0.8,
+            "staging_xy": [
+              0.08055085087825867,
+              6.7505422164891975
+            ],
+            "final_xy": [
+              0.11002725802525157,
+              7.549961351758792
+            ],
+            "final_yaw": -3.13787579536438
+          },
+          "multi_object_slot": {
+            "applied": true,
+            "target": "aux_output_1",
+            "object_name": "white_tote_b01_left_center",
+            "reason": "dynamic_semantic_table_slot",
+            "object_index": 0,
+            "object_count": 3,
+            "slot_multiplier": 0,
+            "slot_spacing_m": 0.5480427753257826,
+            "offset_from_target_center_m": 0.0,
+            "center_xy": [
+              0.144,
+              8.473
+            ],
+            "approach_xy": [
+              0.11,
+              7.55
+            ],
+            "semantic_target_center_xy": [
+              0.144,
+              8.473
+            ],
+            "semantic_target_size_xy": [
+              1.683,
+              0.836
+            ],
+            "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json"
+          },
+          "semantic_station_override": {
+            "center": [
+              0.144,
+              8.473
+            ],
+            "approach": [
+              0.11,
+              7.55
+            ],
+            "kind": "table",
+            "index": 0
+          },
+          "ok": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "底盘已停稳于放置点"
+        ],
+        "expected_output": "物体放置成功，夹爪释放并收回",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "返回取货工位 input_1 的接近点",
+        "success": true,
+        "message": "Moved to: input_1",
+        "payload": {
+          "action": "move",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "source_egress": null,
+          "goal_xy": [
+            -13.1,
+            5.01
+          ],
+          "start_base_pose": {
+            "xy": [
+              0.10992958740745382,
+              7.549574857630948
+            ],
+            "yaw": 1.533829927444458,
+            "robot_base_pos": [
+              0.10992958740745382,
+              7.549574857630948,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.533829927444458
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              -13.100003250099498,
+              4.999995007239883
+            ],
+            "yaw": 1.5289034843444824,
+            "robot_base_pos": [
+              -13.100003250099498,
+              4.999995007239883,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.5289034843444824
+            ]
+          },
+          "waypoints": 40,
+          "path_length_m": 14.441349119140595,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_center"
+        },
+        "preconditions": [
+          "夹爪为空"
+        ],
+        "expected_output": "机器人到达 input_1 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "pick_up",
+        "description": "抓取第三个物体 white_tote_b01_left_back",
+        "success": true,
+        "message": "Physics grasp OK: input_1",
+        "payload": {
+          "action": "pick_up",
+          "target": "input_1",
+          "requested_target": "input_1",
+          "station_mapping": null,
+          "object_name": "white_tote_b01_left_front",
+          "requested_object_name": "white_tote_b01_left_back",
+          "object_safety_correction": {
+            "requested_object": "white_tote_b01_left_back",
+            "resolved_object": "white_tote_b01_left_front",
+            "reason": "rear-first multi-object safety schedule",
+            "remaining_order": [
+              "white_tote_b01_left_front"
+            ]
+          },
+          "grasp_alignment": {
+            "xy": [
+              -13.1,
+              5.01
+            ],
+            "yaw": -3.14,
+            "robot_base_pos": [
+              -13.1,
+              5.01,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.14
+            ],
+            "current_xy": [
+              -13.100003250099498,
+              4.999995007239883
+            ],
+            "current_yaw": 1.5289034843444824,
+            "object_name": "white_tote_b01_left_front",
+            "station_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "position_source": "semantic-map input_1.approach",
+            "yaw_source": "knowledge/task_config.json grasp_poses.input_1.yaw",
+            "formula": "semantic station approach + configured/semantic station yaw"
+          },
+          "checkpoint_selection": {
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "checkpoint": "team_submission/models/final/l5/model_epoch_100.pth",
+            "task_specific": true
+          },
+          "method": "envbackend_physics",
+          "ok": true
+        },
+        "inputs": {
+          "target": "input_1",
+          "object_name": "white_tote_b01_left_back",
+          "grasp_initial_base_pose": {
+            "xy": [
+              -13.100003250099498,
+              4.999995007239883
+            ],
+            "yaw": 1.5289034843444824,
+            "robot_base_pos": [
+              -13.100003250099498,
+              4.999995007239883,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              1.5289034843444824
+            ]
+          }
+        },
+        "preconditions": [
+          "夹爪为空",
+          "底盘已停稳"
+        ],
+        "expected_output": "成功抓取物体并提升至安全高度",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "move",
+        "description": "携带物体导航至放置工位 output_6",
+        "success": true,
+        "message": "Moved to: aux_output_1",
+        "payload": {
+          "action": "move",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "source_egress": {
+            "source": "input_1",
+            "held_object": "white_tote_b01_left_front",
+            "start_xy": [
+              -13.73305168316961,
+              4.416361812549079
+            ],
+            "source_center_xy": [
+              -14.544,
+              5.01
+            ],
+            "source_approach_xy": [
+              -13.1,
+              5.01
+            ],
+            "outward_unit_xy": [
+              1.0,
+              0.0
+            ],
+            "rejected_egress_xy": [
+              -13.13305168316961,
+              4.416361812549079
+            ],
+            "egress_distance_m": 0.6,
+            "method": "a_star_fallback_blocked_straight_egress"
+          },
+          "goal_xy": [
+            0.11,
+            7.55
+          ],
+          "start_base_pose": {
+            "xy": [
+              -13.73305168316961,
+              4.416361812549079
+            ],
+            "yaw": -3.140000343322754,
+            "robot_base_pos": [
+              -13.73305168316961,
+              4.416361812549079,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.140000343322754
+            ]
+          },
+          "final_base_pose": {
+            "xy": [
+              0.10002927991615493,
+              7.549991894234519
+            ],
+            "yaw": -3.1375253200531006,
+            "robot_base_pos": [
+              0.10002927991615493,
+              7.549991894234519,
+              0.0
+            ],
+            "robot_base_ori": [
+              0.0,
+              0.0,
+              -3.1375253200531006
+            ]
+          },
+          "waypoints": 42,
+          "path_length_m": 15.280658325630977,
+          "path_extra_clearance_m": 0.2,
+          "reached": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "夹爪已持握物体"
+        ],
+        "expected_output": "机器人到达 output_6 停止点",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      },
+      {
+        "skill": "place_down",
+        "description": "在 output_6 放下物体",
+        "success": true,
+        "message": "Physics place OK: aux_output_1",
+        "payload": {
+          "action": "place_down",
+          "target": "aux_output_1",
+          "requested_target": "output_6",
+          "station_mapping": {
+            "requested_station": "output_6",
+            "planner_station_token": "output_6",
+            "resolved_station": "aux_output_1",
+            "role": "target",
+            "environment": "FactorySorting9_3FO3ERT2C5FP",
+            "level": "L5",
+            "authority": "knowledge/task_config.json"
+          },
+          "method": "envbackend_physics",
+          "safe_approach": {
+            "applied": true,
+            "target": "aux_output_1",
+            "reason": "semantic_staging_then_backend_turn",
+            "attachment_radius_m": 0.65,
+            "center_to_approach_m": 0.9236260065632635,
+            "turn_angle_rad": 1.6116834155590318,
+            "approach_xy": [
+              -0.4376713280388237,
+              7.570174241769577
+            ],
+            "retreat_distance_m": 0.8,
+            "staging_xy": [
+              -0.46712047716056504,
+              6.770716458258775
+            ],
+            "final_xy": [
+              -0.4376440306471242,
+              7.570134712215751
+            ],
+            "final_yaw": -3.1376869678497314
+          },
+          "multi_object_slot": {
+            "applied": true,
+            "target": "aux_output_1",
+            "object_name": "white_tote_b01_left_front",
+            "reason": "dynamic_semantic_table_slot",
+            "object_index": 1,
+            "object_count": 3,
+            "slot_multiplier": -1,
+            "slot_spacing_m": 0.5480427753257826,
+            "offset_from_target_center_m": 0.5480427753257826,
+            "center_xy": [
+              -0.40367132803882366,
+              8.493174241769578
+            ],
+            "approach_xy": [
+              -0.4376713280388237,
+              7.570174241769577
+            ],
+            "semantic_target_center_xy": [
+              0.144,
+              8.473
+            ],
+            "semantic_target_size_xy": [
+              1.683,
+              0.836
+            ],
+            "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json"
+          },
+          "semantic_station_override": {
+            "center": [
+              -0.40367132803882366,
+              8.493174241769578
+            ],
+            "approach": [
+              -0.4376713280388237,
+              7.570174241769577
+            ],
+            "kind": "table",
+            "index": 0
+          },
+          "ok": true
+        },
+        "inputs": {
+          "target": "output_6"
+        },
+        "preconditions": [
+          "底盘已停稳于放置点"
+        ],
+        "expected_output": "物体放置成功，夹爪释放并收回",
+        "timeout": 3000.0,
+        "retries": 0,
+        "attempts": 1
+      }
+    ],
+    "thinking": {
+      "version": "2.0",
+      "task_understanding": "将三个白色储物箱从 Pick Station 6 (input_1) 搬运到 Place Station 1 (output_6)。",
+      "selection_reason": "根据任务要求，需要依次搬运三个物体，每个物体执行标准的 move → pick_up → move → place_down 流程。",
+      "execution_steps": [
+        "导航至取货工位 input_1 的接近点",
+        "抓取第一个物体 white_tote_b01_left_center",
+        "携带物体导航至放置工位 output_6",
+        "在 output_6 放下物体",
+        "返回取货工位 input_1 的接近点",
+        "抓取第二个物体 white_tote_b01_left_front",
+        "携带物体导航至放置工位 output_6",
+        "在 output_6 放下物体",
+        "返回取货工位 input_1 的接近点",
+        "抓取第三个物体 white_tote_b01_left_back",
+        "携带物体导航至放置工位 output_6",
+        "在 output_6 放下物体"
+      ],
+      "plan_summary": [
+        {
+          "skill": "move",
+          "description": "导航至取货工位 input_1 的接近点"
+        },
+        {
+          "skill": "pick_up",
+          "description": "抓取第一个物体 white_tote_b01_left_center"
+        },
+        {
+          "skill": "move",
+          "description": "携带物体导航至放置工位 output_6"
+        },
+        {
+          "skill": "place_down",
+          "description": "在 output_6 放下物体"
+        },
+        {
+          "skill": "move",
+          "description": "返回取货工位 input_1 的接近点"
+        },
+        {
+          "skill": "pick_up",
+          "description": "抓取第二个物体 white_tote_b01_left_front"
+        },
+        {
+          "skill": "move",
+          "description": "携带物体导航至放置工位 output_6"
+        },
+        {
+          "skill": "place_down",
+          "description": "在 output_6 放下物体"
+        },
+        {
+          "skill": "move",
+          "description": "返回取货工位 input_1 的接近点"
+        },
+        {
+          "skill": "pick_up",
+          "description": "抓取第三个物体 white_tote_b01_left_back"
+        },
+        {
+          "skill": "move",
+          "description": "携带物体导航至放置工位 output_6"
+        },
+        {
+          "skill": "place_down",
+          "description": "在 output_6 放下物体"
+        }
+      ],
+      "result_explanation": "该计划依次搬运三个白色储物箱，每个箱子执行标准的 move → pick_up → move → place_down 流程，确保每次只搬运一个物体，并遵循所有安全约束。"
+    },
+    "planner_raw": "{\n  \"understanding\": \"将三个白色储物箱从 Pick Station 6 (input_1) 搬运到 Place Station 1 (output_6)。\",\n  \"reason\": \"根据任务要求，需要依次搬运三个物体，每个物体执行标准的 move → pick_up → move → place_down 流程。\",\n  \"plan\": [\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"导航至取货工位 input_1 的接近点\",\n      \"inputs\": {\"target\": \"input_1\"},\n      \"preconditions\": [\"底盘静止于起始位置\"],\n      \"expected_output\": \"机器人到达 input_1 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"pick_up\",\n      \"description\": \"抓取第一个物体 white_tote_b01_left_center\",\n      \"inputs\": {\"target\": \"input_1\", \"object_name\": \"white_tote_b01_left_center\"},\n      \"preconditions\": [\"夹爪为空\", \"底盘已停稳\"],\n      \"expected_output\": \"成功抓取物体并提升至安全高度\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"携带物体导航至放置工位 output_6\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"夹爪已持握物体\"],\n      \"expected_output\": \"机器人到达 output_6 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"place_down\",\n      \"description\": \"在 output_6 放下物体\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"底盘已停稳于放置点\"],\n      \"expected_output\": \"物体放置成功，夹爪释放并收回\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"返回取货工位 input_1 的接近点\",\n      \"inputs\": {\"target\": \"input_1\"},\n      \"preconditions\": [\"夹爪为空\"],\n      \"expected_output\": \"机器人到达 input_1 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"pick_up\",\n      \"description\": \"抓取第二个物体 white_tote_b01_left_front\",\n      \"inputs\": {\"target\": \"input_1\", \"object_name\": \"white_tote_b01_left_front\"},\n      \"preconditions\": [\"夹爪为空\", \"底盘已停稳\"],\n      \"expected_output\": \"成功抓取物体并提升至安全高度\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"携带物体导航至放置工位 output_6\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"夹爪已持握物体\"],\n      \"expected_output\": \"机器人到达 output_6 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"place_down\",\n      \"description\": \"在 output_6 放下物体\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"底盘已停稳于放置点\"],\n      \"expected_output\": \"物体放置成功，夹爪释放并收回\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"返回取货工位 input_1 的接近点\",\n      \"inputs\": {\"target\": \"input_1\"},\n      \"preconditions\": [\"夹爪为空\"],\n      \"expected_output\": \"机器人到达 input_1 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"pick_up\",\n      \"description\": \"抓取第三个物体 white_tote_b01_left_back\",\n      \"inputs\": {\"target\": \"input_1\", \"object_name\": \"white_tote_b01_left_back\"},\n      \"preconditions\": [\"夹爪为空\", \"底盘已停稳\"],\n      \"expected_output\": \"成功抓取物体并提升至安全高度\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"move\",\n      \"description\": \"携带物体导航至放置工位 output_6\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"夹爪已持握物体\"],\n      \"expected_output\": \"机器人到达 output_6 停止点\",\n      \"timeout\": 300,\n      \"retries\": 0\n    },\n    {\n      \"skill_name\": \"place_down\",\n      \"description\": \"在 output_6 放下物体\",\n      \"inputs\": {\"target\": \"output_6\"},\n      \"preconditions\": [\"底盘已停稳于放置点\"],\n      \"expected_output\": \"物体放置成功，夹爪释放并收回\",\n      \"timeout\": 300,\n      \"retries\": 0\n    }\n  ],\n  \"explanation\": \"该计划依次搬运三个白色储物箱，每个箱子执行标准的 move → pick_up → move → place_down 流程，确保每次只搬运一个物体，并遵循所有安全约束。\"\n}",
+    "plan_warnings": [],
+    "elapsed_ms": 95201.5
+  },
+  "elapsed_sec": 101.548,
+  "error": null,
+  "traceback": null,
+  "phase": "before_close",
+  "saved_at": "2026-08-15 22:01:29"
+}

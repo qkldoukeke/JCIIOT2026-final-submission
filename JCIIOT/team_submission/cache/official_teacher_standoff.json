@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "standoff_m": 0.9410400255070059,
+  "source": "robosuite/robosuite/environments/factory_sorting/load_factory_sorting_1_3fo3erfhisem_collect.py",
+  "source_sha256": "5a3222db76d4fa23dff5e9ea0598c745d4d5ec69e9f22f945f534c472eab63eb",
+  "teacher_environment": "FactorySorting1_3FO3ERFHISEM",
+  "teacher_object": "line_5_container_h01_near",
+  "teacher_base_xy": [
+    8.000001,
+    4.6
+  ],
+  "teacher_base_yaw": 3.1394220002986786,
+  "teacher_object_center": [
+    7.059,
+    4.619,
+    1.1255
+  ],
+  "teacher_object_center_source": "MuJoCo site line_5_container_h01_near_default_site",
+  "cache_hit": false
+}

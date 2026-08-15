@@ -13,6 +13,11 @@ import numpy as np
 from robot_agent.core.scene_context import SceneContext
 from robot_agent.core.types import ExecutionContext, SkillResult
 from robot_agent.skills.base import BaseSkill
+from robot_agent.skills.execution_state import (
+    held_object,
+    mark_placed_object,
+    set_held_object,
+)
 from robot_agent.skills.pick_up import _resolve_station_name
 from robot_agent.skills.task_station_mapping import (
     configured_task,
@@ -44,12 +49,16 @@ def _load_safe_approach_parameters() -> dict[str, float | bool]:
         "max_retreat": float(
             place.get("safe_approach_max_retreat", 1.30)
         ),
+        "carried_radius": float(
+            place.get("safe_approach_carried_radius", 0.65)
+        ),
     }
     for key in (
         "min_turn_angle",
         "attachment_scale",
         "margin",
         "max_retreat",
+        "carried_radius",
     ):
         value = float(params[key])
         if not np.isfinite(value) or value < 0.0:
@@ -92,9 +101,12 @@ def _load_multi_object_place_parameters() -> dict[str, float | bool]:
     return params
 
 
-def _semantic_output_record(backend, target: str) -> tuple[dict | None, Path | None]:
+def _semantic_output_record(
+    scene: SceneContext,
+    target: str,
+) -> tuple[dict | None, Path | None]:
     """Read the active target geometry through task_config -> semantic map."""
-    task = configured_task(backend)
+    task = configured_task(scene)
     if task is None:
         return None, None
     prefix = str(task.get("scene_prefix") or "").strip()
@@ -125,7 +137,7 @@ def _ordered_slot_multiplier(index: int) -> int:
 
 
 def _multi_object_slot_plan(
-    backend,
+    scene: SceneContext,
     target: str,
     held_object: str | None,
 ) -> dict:
@@ -140,7 +152,7 @@ def _multi_object_slot_plan(
     if not bool(params["enabled"]):
         return result
 
-    objects = configured_task_objects(backend)
+    objects = configured_task_objects(scene)
     if len(objects) <= 1:
         result["reason"] = "single_object_task"
         return result
@@ -148,7 +160,7 @@ def _multi_object_slot_plan(
         result["reason"] = "held_object_not_in_task"
         return result
 
-    station, map_path = _semantic_output_record(backend, target)
+    station, map_path = _semantic_output_record(scene, target)
     if station is None:
         result.update(
             {
@@ -216,6 +228,33 @@ def _multi_object_slot_plan(
     return result
 
 
+def _semantic_station_override(
+    scene: SceneContext,
+    target: str,
+    slot_plan: dict,
+) -> dict:
+    """Build a backend-adapter station record from semantic knowledge."""
+    station = scene.output_ports.get(target)
+    if station is None or station.approach is None:
+        raise RuntimeError(f"semantic output station is unavailable: {target}")
+    center = (
+        slot_plan.get("center_xy")
+        if slot_plan.get("applied")
+        else np.asarray(station.center, dtype=float).tolist()
+    )
+    approach = (
+        slot_plan.get("approach_xy")
+        if slot_plan.get("applied")
+        else np.asarray(station.approach, dtype=float).tolist()
+    )
+    return {
+        "center": center,
+        "approach": approach,
+        "kind": station.kind or "table",
+        "index": max(0, int(station.index) - 1),
+    }
+
+
 @contextmanager
 def _multi_object_output_slot_adapter(
     backend,
@@ -223,8 +262,16 @@ def _multi_object_output_slot_adapter(
     target: str,
 ):
     """Temporarily expose the current object's dynamic table slot."""
-    held_object = getattr(backend, "_held_crate_name", None)
-    plan = _multi_object_slot_plan(backend, target, held_object)
+    carried_object = held_object(backend)
+    if scene is None:
+        yield {
+            "applied": False,
+            "target": target,
+            "object_name": carried_object,
+            "reason": "no_scene_context",
+        }
+        return
+    plan = _multi_object_slot_plan(scene, target, carried_object)
     if not bool(plan.get("applied")) or scene is None:
         yield plan
         return
@@ -236,9 +283,7 @@ def _multi_object_output_slot_adapter(
         yield plan
         return
 
-    env = getattr(backend, "env", None)
-    env_ports = getattr(env, "output_ports", None)
-    env_station = env_ports.get(target) if isinstance(env_ports, dict) else None
+    env_station = None
 
     old_scene_center = np.asarray(scene_station.center, dtype=float).copy()
     old_scene_approach = (
@@ -286,7 +331,7 @@ def _multi_object_output_slot_adapter(
     logger.info(
         "place_down multi-object slot: object=%s index=%d/%d "
         "offset=%.3fm center=(%.3f,%.3f)",
-        held_object,
+        carried_object,
         int(plan["object_index"]) + 1,
         int(plan["object_count"]),
         float(plan["offset_from_target_center_m"]),
@@ -340,27 +385,10 @@ def _prepare_safe_output_approach(
         result["reason"] = "no_semantic_output_approach"
         return result
 
-    raw = getattr(backend, "env", None)
-    if raw is None:
-        result["reason"] = "no_environment"
-        return result
-
-    from robosuite.environments.factory_sorting.transport_attachment import (
-        TRANSPORT_ATTACHMENT_ATTR,
-    )
-
-    attachment = getattr(raw, TRANSPORT_ATTACHMENT_ATTR, None)
-    if not attachment or not attachment.get("active", False):
-        result["reason"] = "no_active_transport_attachment"
-        return result
-
-    relative_xy = np.asarray(attachment.get("relative_xy"), dtype=float)
-    if relative_xy.shape != (2,) or not np.all(np.isfinite(relative_xy)):
-        raise RuntimeError("invalid live transport attachment relative_xy")
-    attachment_radius = float(np.linalg.norm(relative_xy))
-    if attachment_radius < 0.05:
-        result["reason"] = "negligible_attachment_radius"
-        return result
+    # The skill does not inspect the backend's transport attachment or MuJoCo
+    # state.  Use the conservative carried-radius parameter from the allowed
+    # robot configuration; attachment synchronization remains backend-owned.
+    attachment_radius = float(params["carried_radius"])
 
     center = np.asarray(station.center, dtype=float).reshape(-1)[:2]
     approach = np.asarray(station.approach, dtype=float).reshape(-1)[:2]
@@ -432,38 +460,9 @@ def _prepare_safe_output_approach(
     if not backend.follow_path([base_xy.copy(), staging.copy()]):
         raise RuntimeError(f"failed to retreat to safe staging point for {target}")
 
-    from robosuite.environments.factory_sorting.turn_to_station import (
-        turn_to_face_xy,
-    )
-    from robot_agent.environments.robosuite_backend import (
-        _capture_upper_body_posture,
-        _restore_upper_body_posture,
-    )
-
-    turn_params = getattr(backend, "_rp", {}).get("turn", {})
-    posture = _capture_upper_body_posture(raw, raw.robots[0])
-
-    def _record_turn_frame() -> None:
-        _restore_upper_body_posture(raw, posture)
-        backend._record_trajectory_frame()
-
-    turn_result = turn_to_face_xy(
-        env=raw,
-        target_xy=center,
-        tolerance=float(turn_params.get("tolerance", 0.02)),
-        max_iters=int(turn_params.get("max_iters", 8)),
-        turn_steps=int(turn_params.get("turn_steps", 40)),
-        settle_steps=int(turn_params.get("settle_steps", 10)),
-        render=not bool(getattr(backend, "_headless", True)),
-        render_sleep=0.0,
-        sync_attachment=True,
-        post_step_callback=_record_turn_frame,
-    )
-    if not turn_result.get("success", False):
-        raise RuntimeError(
-            f"failed to face output from safe staging point for {target}"
-        )
-
+    # Rotation and carried-object synchronization are performed by
+    # ``place_object_physics`` inside the backend.  The skill only supplies a
+    # collision-aware staging / approach path through ``follow_path``.
     turned_xy, _ = backend.get_base_pose()
     if not backend.follow_path(
         [np.asarray(turned_xy, dtype=float), approach.copy()]
@@ -474,10 +473,9 @@ def _prepare_safe_output_approach(
     result.update(
         {
             "applied": True,
-            "reason": "retreat_turn_straight_approach",
+            "reason": "semantic_staging_then_backend_turn",
             "final_xy": np.asarray(final_xy, dtype=float).tolist(),
             "final_yaw": float(final_yaw),
-            "turn_result": turn_result,
         }
     )
     return result
@@ -485,60 +483,12 @@ def _prepare_safe_output_approach(
 
 @contextmanager
 def _semantic_output_station_adapter(
-    backend,
-    scene: SceneContext | None,
-    target: str,
+    _backend,
+    _scene: SceneContext | None,
+    _target: str,
 ):
-    """Expose a semantic-map output missing from the legacy env port table."""
-    env = getattr(backend, "env", None)
-    ports = getattr(env, "output_ports", None)
-    if scene is None or not isinstance(ports, dict):
-        yield
-        return
-
-    existing = None
-    find_entry = getattr(backend, "_find_output_station_entry", None)
-    if callable(find_entry):
-        _, existing = find_entry(target)
-    if existing is not None:
-        yield
-        return
-
-    info = scene.output_ports.get(target)
-    if info is None:
-        yield
-        return
-
-    center_values = np.asarray(info.center, dtype=float).reshape(-1)
-    center = np.zeros(3, dtype=float)
-    center[: min(3, center_values.size)] = center_values[:3]
-    approach = None
-    if info.approach is not None:
-        approach_values = np.asarray(info.approach, dtype=float).reshape(-1)
-        approach = np.zeros(3, dtype=float)
-        approach[: min(3, approach_values.size)] = approach_values[:3]
-
-    station = {
-        "name": info.name,
-        "kind": info.kind or "table",
-        "side": "output",
-        "index": max(0, int(info.index) - 1),
-        "center": center,
-        "approach": approach,
-        "semantic_map_adapter": True,
-    }
-    ports[target] = station
-    logger.info(
-        "place_down adapted semantic output station %s center=(%.4f, %.4f)",
-        target,
-        center[0],
-        center[1],
-    )
-    try:
-        yield
-    finally:
-        if ports.get(target) is station:
-            del ports[target]
+    """Compatibility shim; station adaptation is backend-adapter owned."""
+    yield
 
 
 class PlaceDownSkill(BaseSkill):
@@ -566,18 +516,25 @@ class PlaceDownSkill(BaseSkill):
             or context.task
         )
         target = raw_target
-        if self._scene is not None:
-            target = _resolve_station_name(raw_target, self._scene)
-            logger.info("place_down target: %r → %r", raw_target, target)
+        if self._scene is None:
+            return SkillResult(
+                skill_name=self.name,
+                success=False,
+                message="Physics place blocked: scene context unavailable",
+                payload={"action": "place_down", "target": raw_target},
+            )
+        target = _resolve_station_name(raw_target, self._scene)
+        logger.info("place_down target: %r → %r", raw_target, target)
 
         # Physics place (only mode — no teleport fallback)
         target, station_mapping = resolve_configured_station(
-            self._backend,
+            self._scene,
             target,
             role="target",
         )
 
-        if hasattr(self._backend, "place_object_physics"):
+        place = getattr(self._backend, "place_object_physics", None)
+        if callable(place):
             try:
                 with _semantic_output_station_adapter(
                     self._backend,
@@ -589,22 +546,31 @@ class PlaceDownSkill(BaseSkill):
                         self._scene,
                         target,
                     ) as multi_object_slot:
+                        station_override = _semantic_station_override(
+                            self._scene,
+                            target,
+                            multi_object_slot,
+                        )
                         safe_approach = _prepare_safe_output_approach(
                             self._backend,
                             self._scene,
                             target,
                         )
-                        ok = self._backend.place_object_physics(target)
-                        _ports = (
-                            list(self._backend.env.output_ports.keys())
-                            if hasattr(self._backend, "env") and self._backend.env
-                            else []
+                        ok = bool(
+                            place(
+                                target,
+                                station_override=station_override,
+                            )
                         )
+                if ok:
+                    mark_placed_object(
+                        self._backend,
+                        multi_object_slot.get("object_name"),
+                    )
+                    set_held_object(self._backend, None)
                 msg = f"Physics place {'OK' if ok else 'FAIL'}: {target}"
                 if not ok:
-                    _held = getattr(self._backend, "_held_crate_name", None)
-                    logger.warning("place_down: failed target=%s held=%s avail_out=%s", target, _held, _ports)
-                    msg += f" held={_held} out_ports={_ports}"
+                    logger.warning("place_down: backend rejected target=%s", target)
                 return SkillResult(
                     skill_name=self.name,
                     success=ok,
@@ -614,9 +580,10 @@ class PlaceDownSkill(BaseSkill):
                         "target": target,
                         "requested_target": raw_target,
                         "station_mapping": station_mapping,
-                        "method": "physics",
+                        "method": "envbackend_physics",
                         "safe_approach": safe_approach,
                         "multi_object_slot": multi_object_slot,
+                        "semantic_station_override": station_override,
                         "ok": ok,
                     },
                 )
@@ -634,19 +601,16 @@ class PlaceDownSkill(BaseSkill):
                     },
                 )
 
-        # No physics configured — teleport only
-        try:
-            self._backend.place_object(target)
-        except Exception:
-            pass
+        # Fail closed instead of falling back to non-physical teleportation.
         return SkillResult(
-            skill_name=self.name, success=True,
-            message=f"Placed (snap): {target}",
+            skill_name=self.name, success=False,
+            message="Physics place blocked: backend capability unavailable",
             payload={
                 "action": "place_down",
                 "target": target,
                 "raw_target": raw_target,
                 "station_mapping": station_mapping,
-                "method": "teleport",
+                "method": "envbackend_physics",
+                "ok": False,
             },
         )

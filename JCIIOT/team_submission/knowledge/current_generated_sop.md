@@ -1,19 +1,19 @@
-# L1 Team-Generated Task SOP
+# L5 Team-Generated Task SOP
 
 <!-- TEAM GENERATED — SAFE TO REGENERATE -->
 
 ## Planner Quick Facts
 
-- CURRENT LEVEL: `L1`
-- MATERIAL: blue, hollow plastic box
-- SOURCE: `input_5` (Pick Station 2)
-- TARGET: `output_4` (Place Station 3)
-- QUANTITY: `1`
-- EXACT OBJECTS: `line_5_container_h01_near`, `line_5_container_h01_far`
-- REQUIRED PLAN: `move input_5 → pick_up → move output_4 → place_down`
+- CURRENT LEVEL: `L5`
+- MATERIAL: white-rimmed storage bins
+- SOURCE: `input_1` (Pick Station 6)
+- TARGET: `aux_output_1` (Place Station 1)
+- QUANTITY: `3`
+- EXACT OBJECTS: `white_tote_b01_left_center`, `white_tote_b01_left_front`, `white_tote_b01_left_back`
+- REQUIRED PLAN: `move input_1 → pick_up → move aux_output_1 → place_down`
 - The current task prompt and runtime mapping override stale examples in the generic Word SOP body.
 
-- Source DOCX: `JCIIOT 2026 case 1 SOP.docx`
+- Source DOCX: `JCIIOT 2026 case 9 SOP.docx`
 - Generator: `src/robot_agent/skills/read_document.py`
 - Destination: team-owned SOP archive; locked competition knowledge is not modified
 
@@ -27,36 +27,41 @@
 
 ## Current Task Prompt (authoritative)
 
-> Task Prompt: For this task, you need to transport a blue, hollow plastic box. Please move it from the starting point "Pick Station 2" to the destination "Place Station 3". Please follow the Standard Operating Procedure (SOP).
+> Move the three white-rimmed storage bins from Pick Station 6 to Place Station 1.
 
 ## Parsed Task Summary
 
-- Level: `L1`
-- Case number: `1`
-- Material: blue, hollow plastic box
-- Human source label: Pick Station 2
-- Human target label: Place Station 3
-- Quantity: `1`
+- Level: `L5`
+- Case number: `9`
+- Material: white-rimmed storage bins
+- Human source label: Pick Station 6
+- Human target label: Place Station 1
+- Quantity: `3`
 
 ## Runtime Mapping
 
-- Scene prefix: `factory_sorting_1_3fo3erfhisem`
-- Environment: `FactorySorting1_3FO3ERFHISEM`
-- Source station ID: `input_5`
-- Target station ID: `output_4`
-- Maximum score: `10`
+- Scene prefix: `factory_sorting_9_3fo3ert2c5fp`
+- Environment: `FactorySorting9_3FO3ERT2C5FP`
+- Source station ID: `input_1`
+- Target station ID: `aux_output_1`
+- Maximum score: `30`
 - Exact object names, in configured order:
-  - `line_5_container_h01_near`
-  - `line_5_container_h01_far`
+  - `white_tote_b01_left_center`
+  - `white_tote_b01_left_front`
+  - `white_tote_b01_left_back`
+- Safety-scheduled execution order (rear-first):
+  - `white_tote_b01_left_back`
+  - `white_tote_b01_left_center`
+  - `white_tote_b01_left_front`
 
 ## Station Geometry
 
-- Scene map: `factory_sorting_1_3fo3erfhisem_scene_regenerated_semantic_map.json`
+- Scene map: `factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json`
 - Coordinate frame: `mujoco_world_xy`
-- Source center: `(7.186, 3.938)`
-- Source navigation approach: `(8, 4.619)`
-- Target center: `(-0.166, -7.29)`
-- Target navigation approach: `(-1.02, -7.29)`
+- Source center: `(-14.544, 5.01)`
+- Source navigation approach: `(-13.1, 5.01)`
+- Target center: `(0.144, 8.473)`
+- Target navigation approach: `(0.11, 7.55)`
 
 ## BC Grasp Start Pose
 
@@ -67,10 +72,11 @@
 
 ## Required Skill Flow
 
-1. `move(target="input_5")`
-2. `pick_up(object_name="line_5_container_h01_near")`
-3. `move(target="output_4")` while carrying the object
-4. `place_down(target="output_4")`
+1. `move(target="input_1")`
+2. Pick the required objects in safety-scheduled order: `white_tote_b01_left_back`, `white_tote_b01_left_center`, `white_tote_b01_left_front`
+3. `move(target="aux_output_1")` while carrying the object
+4. `place_down(target="aux_output_1")`
+5. Repeat the pick/transport/place cycle until `3` objects are placed.
 
 ## Execution Checks
 

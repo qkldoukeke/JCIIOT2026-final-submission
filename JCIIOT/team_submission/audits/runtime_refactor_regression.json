@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "run_date_local": "2026-08-15",
+  "purpose": "Post-refactor offline physical skill-chain regression",
+  "official_score_evidence": false,
+  "historical_score_evidence_modified": false,
+  "runner": "team_submission/audits/runtime_refactor_smoke.py",
+  "sequence": [
+    "move(source)",
+    "pick_up(source, object_name)",
+    "move(target)",
+    "place_down(target)"
+  ],
+  "levels": {
+    "L1": {
+      "environment": "FactorySorting1_3FO3ERFHISEM",
+      "source": "input_5",
+      "target": "output_4",
+      "object": "line_5_container_h01_near",
+      "all_steps_success": true,
+      "step_elapsed_seconds": 71.057,
+      "wall_elapsed_seconds": 94.0
+    },
+    "L2": {
+      "environment": "FactorySorting3_3FO3ERRPH7X9",
+      "source": "input_6",
+      "target": "output_4",
+      "object": "green_tote_b01_upper",
+      "all_steps_success": true,
+      "step_elapsed_seconds": 67.354,
+      "wall_elapsed_seconds": 92.7
+    },
+    "L3": {
+      "environment": "FactorySorting5_3FO3ERTPXEUT",
+      "source": "aux_input_1",
+      "target": "output_5",
+      "object": "blue_tote_b01_far_right",
+      "all_steps_success": true,
+      "step_elapsed_seconds": 71.164,
+      "wall_elapsed_seconds": 94.6
+    },
+    "L4": {
+      "environment": "FactorySorting7_3FO3ERFKY9RN",
+      "source": "input_2",
+      "target": "output_5",
+      "object": "blue_container_h01_back_upper",
+      "all_steps_success": true,
+      "step_elapsed_seconds": 93.024,
+      "wall_elapsed_seconds": 118.0
+    },
+    "L5": {
+      "environment": "FactorySorting9_3FO3ERT2C5FP",
+      "source": "input_1",
+      "target": "aux_output_1",
+      "objects": [
+        "white_tote_b01_left_back",
+        "white_tote_b01_left_center",
+        "white_tote_b01_left_front"
+      ],
+      "execution_order": "rear-center-front",
+      "objects_requested": 3,
+      "objects_completed": 3,
+      "all_steps_success": true,
+      "step_elapsed_seconds": 232.223,
+      "wall_elapsed_seconds": 262.4,
+      "scope_note": "Three complete move-pick-move-place cycles; 12/12 skill steps passed. The harness requested the immutable catalog order (center-front-back); the skill safety gate audibly resolved it to rear-center-front before execution."
+    }
+  },
+  "summary": {
+    "levels_run": 5,
+    "levels_passed": 5,
+    "complete_four_step_chains": 7,
+    "compliant": true
+  },
+  "limitations": [
+    "This is an offline skill-level physical regression, not an official scorer result.",
+    "Historical 100/100 score, result, and trajectory JSON files were not rewritten.",
+    "Final leaderboard validity remains subject to organizer reproduction."
+  ]
+}

@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-14T14:26:17.494904+00:00",
+  "generated_at": "2026-08-15T15:16:50.252492+00:00",
   "task_config": "knowledge/task_config.json",
   "task_config_sha256": "4ab0b19ed3599421f1de91aebdcc777d0bded83ed56cebe12f937cfc95d62331",
   "summary": {
     "sop_count": 5,
     "valid_sops": 5,
-    "active_level": "L1",
+    "active_level": "L5",
     "active_matches_archive": true,
     "automatic_environment_activation": true,
     "compliant": true
@@ -151,7 +151,7 @@
       "semantic_map": "robosuite/robosuite/environments/factory_sorting/generated_maps/factory_sorting_9_3fo3ert2c5fp_scene_regenerated_semantic_map.json",
       "semantic_map_sha256": "652b8d6c64d9cc80c6a9430ec9d9a3cc657467e57a6a4117b03f9718f81d5279",
       "generated_sop": "team_submission/generated_sops/generated_sop_l5.md",
-      "generated_sop_sha256": "d37bad2a7b7741bad7e4ac590cc08ff977445e269fcc64ccda602eeb5ce65ece",
+      "generated_sop_sha256": "99f960fc3b3dd31865ff3d5efee1980a665250cff0c57955536eb98dae43ac50",
       "checks": {
         "docx_exists": true,
         "generated_sop_exists": true,

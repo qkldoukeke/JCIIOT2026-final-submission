@@ -21,6 +21,7 @@ from typing import Any
 
 from robot_agent.core.types import ExecutionContext, SkillResult
 from robot_agent.skills.base import BaseSkill
+from robot_agent.skills.task_station_mapping import safety_ordered_objects
 
 logger = logging.getLogger(__name__)
 
@@ -333,7 +334,11 @@ def _build_sop_markdown(
     target = str(task.get("target") or "not available")
     object_names = [str(item) for item in task.get("object", []) if str(item)]
     quantity = int(prompt.get("quantity") or 1)
-    selected_objects = object_names[:quantity] if quantity > 1 else object_names[:1]
+    selected_objects = (
+        safety_ordered_objects(object_names)[:quantity]
+        if quantity > 1
+        else object_names[:1]
+    )
 
     source_station = _station_record(scene_map, source)
     target_station = _station_record(scene_map, target)
@@ -412,6 +417,9 @@ def _build_sop_markdown(
     if object_names:
         lines.append("- Exact object names, in configured order:")
         lines.extend(f"  - `{name}`" for name in object_names)
+        if quantity > 1:
+            lines.append("- Safety-scheduled execution order (rear-first):")
+            lines.extend(f"  - `{name}`" for name in selected_objects)
     else:
         lines.append("- Exact object names: not available")
 
@@ -449,7 +457,7 @@ def _build_sop_markdown(
             lines.append(f"2. `pick_up(object_name=\"{selected_objects[0]}\")`")
         else:
             lines.append(
-                "2. Pick the required objects in configured order: "
+                "2. Pick the required objects in safety-scheduled order: "
                 + ", ".join(f"`{name}`" for name in selected_objects)
             )
     else:

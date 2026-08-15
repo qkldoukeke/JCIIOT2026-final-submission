@@ -12,6 +12,7 @@ import numpy as np
 
 from robot_agent.core.types import ExecutionContext, SkillResult
 from robot_agent.skills.base import BaseSkill
+from robot_agent.skills.execution_state import held_object
 from robot_agent.skills.task_station_mapping import (
     configured_station_for_role,
     resolve_configured_station,
@@ -171,7 +172,7 @@ class MoveSkill(BaseSkill):
             or context.task
         )
         target, station_mapping = resolve_configured_station(
-            self._backend,
+            self._scene,
             requested_target,
         )
 
@@ -240,9 +241,6 @@ class MoveSkill(BaseSkill):
                 "waypoints": len(path),
                 "path_length_m": path_length,
                 "path_extra_clearance_m": self._last_planned_clearance,
-                "max_linear_mps": float(
-                    getattr(self._backend, "_max_linear", 0.0)
-                ),
                 "reached": reached,
             },
         )
@@ -264,9 +262,9 @@ class MoveSkill(BaseSkill):
         approach point preserves the object's lateral lane and avoids sweeping
         through a neighbouring item.
         """
-        held_object = getattr(self._backend, "_held_crate_name", None)
-        source = configured_station_for_role(self._backend, "source")
-        if held_object and source:
+        carried_object = held_object(self._backend)
+        source = configured_station_for_role(self._scene, "source")
+        if carried_object and source:
             try:
                 source_approach = np.asarray(
                     self._scene.approach_xy(source),
@@ -289,7 +287,7 @@ class MoveSkill(BaseSkill):
                                     path.append(waypoint.copy())
                             return path, {
                                 "source": source,
-                                "held_object": str(held_object),
+                                "held_object": carried_object,
                                 "start_xy": np.asarray(
                                     start_xy,
                                     dtype=float,
@@ -337,7 +335,7 @@ class MoveSkill(BaseSkill):
                                 path.append(waypoint.copy())
                         return path, {
                             "source": source,
-                            "held_object": str(held_object),
+                            "held_object": carried_object,
                             "start_xy": np.asarray(
                                 start_xy,
                                 dtype=float,
@@ -359,7 +357,7 @@ class MoveSkill(BaseSkill):
                     fallback = self._plan(start_xy, goal_xy)
                     return fallback, {
                         "source": source,
-                        "held_object": str(held_object),
+                        "held_object": carried_object,
                         "start_xy": np.asarray(
                             start_xy,
                             dtype=float,
@@ -380,7 +378,7 @@ class MoveSkill(BaseSkill):
                     fallback = self._plan(start_xy, goal_xy)
                     return fallback, {
                         "source": source,
-                        "held_object": str(held_object),
+                        "held_object": carried_object,
                         "start_xy": np.asarray(
                             start_xy,
                             dtype=float,

@@ -1,0 +1,10 @@
+{
+  "verified_at": "2026-08-15T23:17:09+08:00",
+  "passed": true,
+  "failures": {},
+  "counts": {
+    "runtime_sources": 44,
+    "models": 5,
+    "historical_evidence": 15
+  }
+}

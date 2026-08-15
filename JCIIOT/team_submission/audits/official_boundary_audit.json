@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-14T14:31:46.121065+00:00",
+  "generated_at": "2026-08-14T17:24:24.173558+00:00",
   "reference_repository": "https://github.com/JCIIOT2026/JCIIOT2026",
   "reference_commit": "80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
   "reference_archive_url": "https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
-  "reference_zip": "JCIIOT2026-80d8f9216b0716c6c7a20c19582b532ff1c9cdf2.zip",
+  "reference_zip": ".audit_official_80d8f921_full.zip",
   "reference_zip_sha256": "d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a",
   "current_root": ".",
   "protected_rules": {

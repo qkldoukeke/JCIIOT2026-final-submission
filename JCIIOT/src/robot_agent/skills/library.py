@@ -17,13 +17,15 @@ from robot_agent.core.scene_context import SceneContext
 from robot_agent.environments.base import EnvBackend
 from robot_agent.skills.base import BaseSkill
 from robot_agent.skills.move import MoveSkill
-from robot_agent.skills.pick_up import PickUpSkill
+from robot_agent.skills.pick_up import PickUpSkill, _configure_task_checkpoint
 from robot_agent.skills.place_down import PlaceDownSkill
 from robot_agent.skills.record_trajectory import RecordTrajectorySkill
 from robot_agent.skills.analyze_supply import AnalyzeSupplySkill
 from robot_agent.skills.knowledge_mgr import KnowledgeMgrSkill
 from robot_agent.skills.memory_mgr import MemoryMgrSkill
 from robot_agent.skills.read_document import ReadDocumentSkill
+from robot_agent.skills.task_station_mapping import configured_task
+from robot_agent.workflows.semantic_backend import SemanticBackendAdapter
 
 
 logger = logging.getLogger(__name__)
@@ -35,7 +37,9 @@ _TEAM_KNOWLEDGE_ROOT = _PROJECT_ROOT / "team_submission" / "knowledge"
 _ACTIVE_SOP_PATH = _TEAM_KNOWLEDGE_ROOT / "current_generated_sop.md"
 
 
-def _activate_generated_sop_for_backend(backend: EnvBackend | None) -> dict | None:
+def _activate_generated_sop_for_scene(
+    scene_context: SceneContext | None,
+) -> dict | None:
     """Activate the team-generated SOP matching the live environment.
 
     The environment-to-level mapping remains authoritative in the locked
@@ -43,30 +47,33 @@ def _activate_generated_sop_for_backend(backend: EnvBackend | None) -> dict | No
     generated team SOP and copies it into the planner-visible team knowledge
     directory.  It does not alter organizer knowledge or infer coordinates.
     """
-    if backend is None:
+    if scene_context is None:
         return None
 
-    env_name = str(getattr(backend, "_env_name", "") or "").strip()
-    if not env_name or not _TASK_CONFIG_PATH.exists():
+    scene_name = str(scene_context.scene_name or "").strip()
+    map_name = str(scene_context.map_name or "").strip()
+    identifiers = {
+        value.casefold()
+        for value in (
+            scene_name,
+            map_name,
+            map_name.removesuffix("_scene_regenerated"),
+        )
+        if value
+    }
+    if not identifiers or not _TASK_CONFIG_PATH.exists():
         return None
 
     try:
-        catalog = json.loads(_TASK_CONFIG_PATH.read_text(encoding="utf-8"))
-        matches = [
-            task
-            for task in catalog.get("tasks", [])
-            if isinstance(task, dict)
-            and str(task.get("env_name") or "") == env_name
-        ]
-        if len(matches) != 1:
+        task = configured_task(scene_context)
+        if task is None:
             logger.warning(
-                "team SOP activation skipped: env=%s matches=%d",
-                env_name,
-                len(matches),
+                "team SOP activation skipped: scene=%s",
+                "/".join(sorted(identifiers)),
             )
             return None
 
-        task = matches[0]
+        env_name = str(task.get("env_name") or "")
         level = str(task.get("level") or "").strip().upper()
         source = str(task.get("source") or "").strip()
         target = str(task.get("target") or "").strip()
@@ -129,7 +136,10 @@ def _activate_generated_sop_for_backend(backend: EnvBackend | None) -> dict | No
         logger.info("team-generated SOP active: %s", result)
         return result
     except Exception:
-        logger.exception("team-generated SOP activation failed for %s", env_name)
+        logger.exception(
+            "team-generated SOP activation failed for %s",
+            "/".join(sorted(identifiers)),
+        )
         return None
 
 
@@ -200,19 +210,25 @@ def wired_skills(
     memory_store: InMemoryStore | None = None,
 ) -> list[BaseSkill]:
     """Return skills wired to a real (or simulated) backend."""
-    _activate_generated_sop_for_backend(backend)
+    _activate_generated_sop_for_scene(scene_context)
     _vis_cfg = _detect_vision_api_config()
+    execution_backend = SemanticBackendAdapter(backend, scene_context)
+    if (
+        execution_backend.supports_physics_grasp
+        and configured_task(scene_context) is not None
+    ):
+        _configure_task_checkpoint(execution_backend, scene_context)
     skills: list[BaseSkill] = [
         MoveSkill(
-            backend=backend,
+            backend=execution_backend,
             scene_context=scene_context,
             grid=grid,
             path_spacing=path_spacing,
         ),
-        PickUpSkill(backend=backend, scene_context=scene_context),
-        PlaceDownSkill(backend=backend, scene_context=scene_context),
+        PickUpSkill(backend=execution_backend, scene_context=scene_context),
+        PlaceDownSkill(backend=execution_backend, scene_context=scene_context),
         AnalyzeSupplySkill(
-            backend=backend,
+            backend=execution_backend,
             scene_context=scene_context,
             grid=grid,
             path_spacing=path_spacing,

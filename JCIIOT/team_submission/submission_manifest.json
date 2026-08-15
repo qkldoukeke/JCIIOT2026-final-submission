@@ -8,7 +8,7 @@
   },
   "version_control": {
     "runtime_baseline_commit": "4b9d7ed71d57e307d7a0bb3b41f55201704a466e",
-    "release_content_commit": "463df8a05c9eae04f1568a284bc3f81d6d45870a",
+    "release_content_commit": "6f06dfeae82df5861c30b2c3d5d8e752908b922d",
     "release_content_commit_semantics": "Immutable pre-manifest-finalization commit containing all repaired submission content"
   },
   "official_reference": {
@@ -16,7 +16,7 @@
     "commit": "80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
     "archive_url": "https://codeload.github.com/JCIIOT2026/JCIIOT2026/zip/80d8f9216b0716c6c7a20c19582b532ff1c9cdf2",
     "archive_sha256": "d5245cb57b0c9c99253f397950a30a4255e98af78390cc2d0850784cb84bda2a",
-    "audit_time_utc": "2026-08-14T14:31:46.121065+00:00",
+    "audit_time_utc": "2026-08-14T17:13:31.234241+00:00",
     "protected_summary": {
       "reference_files": 4972,
       "ordinary_identical": 4966,
@@ -25,7 +25,6 @@
       "lfs_unavailable": 0,
       "modified": 0,
       "missing": 0,
-      "protected_extras": 0,
       "violations": 0
     }
   },
@@ -33,7 +32,22 @@
     "score": 100,
     "max_score": 100,
     "total_elapsed_sec": 267.76,
-    "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json"
+    "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json",
+    "evidence_stage": "historical pre-boundary-refactor official scoring run"
+  },
+  "post_refactor_regression": {
+    "date_local": "2026-08-15",
+    "type": "offline physical four-skill chain",
+    "levels_passed": 5,
+    "levels_run": 5,
+    "complete_four_step_chains": 7,
+    "l5_objects_requested": 3,
+    "l5_objects_completed": 3,
+    "l5_skill_steps_passed": 12,
+    "l5_skill_steps_run": 12,
+    "l5_execution_order": "rear-center-front",
+    "official_score_evidence": false,
+    "report": "team_submission/audits/runtime_refactor_regression.json"
   },
   "level_results": {
     "L1": {
@@ -154,7 +168,7 @@
   "grasp_router": "scripted_first_with_bc_recovery",
   "known_compliance_risks": [
     "Organizer-protected source passes the fixed-reference audit.",
-    "Skill-layer programmed grasp uses public simulation helper interfaces; the permitted interface boundary remains pending written organizer clarification."
+    "Skills depend only on the player-owned CompetitionEnvBackend protocol and do not access MuJoCo directly. Simulator operations are isolated in the workflow-layer SemanticBackendAdapter; final interpretation of this custom backend extension remains subject to organizer review."
   ],
   "training_reproducibility": {
     "inference_reproducible": true,

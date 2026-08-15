@@ -73,6 +73,7 @@
     "safe_approach_attachment_scale": 1.0,
     "safe_approach_margin": 0.15,
     "safe_approach_max_retreat": 1.30,
+    "safe_approach_carried_radius": 0.65,
     "distribute_multi_object_slots": true,
     "multi_object_score_radius": 0.80,
     "multi_object_score_margin": 0.10,

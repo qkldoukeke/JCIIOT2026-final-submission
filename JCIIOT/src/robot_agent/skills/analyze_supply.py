@@ -47,6 +47,7 @@ class AnalyzeSupplySkill(BaseSkill):
             ),
         )
         self._backend = backend
+        self._scene = scene_context
         self._move = MoveSkill(
             backend=backend, scene_context=scene_context,
             grid=grid, path_spacing=path_spacing,
@@ -62,7 +63,7 @@ class AnalyzeSupplySkill(BaseSkill):
 
         # Resolve target to output station
         from robot_agent.skills.pick_up import _resolve_station_name
-        target = _resolve_station_name(raw_target, self._move._scene)
+        target = _resolve_station_name(raw_target, self._scene)
         logger.info("analyze_supply: target=%r (from %r)", target, raw_target)
 
         # Scan available crates
@@ -177,11 +178,10 @@ class AnalyzeSupplySkill(BaseSkill):
             best = None
             best_dist = float("inf")
             for port_name in available:
-                # Get station center from the environment
-                info = self._backend.env.input_ports.get(port_name)
+                info = self._scene.input_ports.get(port_name)
                 if info is None:
                     continue
-                center = np.asarray(info["center"][:2])
+                center = np.asarray(info.center[:2])
                 dist = float(np.linalg.norm(center - base_xy))
                 if dist < best_dist:
                     best_dist = dist

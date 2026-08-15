@@ -217,7 +217,6 @@ def markdown_summary(report: dict[str, object]) -> str:
     statuses = summary["status_counts"]
     extras = summary["extra_counts"]
     compliant = "通过" if summary["compliant"] else "不通过"
-    extra_total = int(summary["protected_extras"])
     lines = [
         "# 主办方维护边界审计",
         "",
@@ -244,11 +243,7 @@ def markdown_summary(report: dict[str, object]) -> str:
         f"- 安装元数据：`{extras.get('packaging_metadata', 0)}`",
         f"- 未预期受保护新增项：`{extras.get('unexpected_protected_extra', 0)}`",
         "",
-        (
-            "最终干净提交树中没有受保护目录额外文件。"
-            if extra_total == 0
-            else "上述新增缓存、采集数据和安装元数据不属于参考源码，提交打包时必须排除。"
-        ),
+        "上述新增缓存、采集数据和安装元数据不属于参考源码，提交打包时必须排除。",
         "完整逐文件哈希与分类见同名 JSON 报告。",
         "",
     ]

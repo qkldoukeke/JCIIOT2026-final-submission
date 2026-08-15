@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-08-15T15:17:23.545209+00:00",
+  "scope": "src/robot_agent/skills/*.py",
+  "policy": {
+    "forbidden_import_prefixes": [
+      "robosuite",
+      "mujoco",
+      "mujoco_py"
+    ],
+    "forbidden_attributes": [
+      "_env",
+      "_held_crate_name",
+      "_physics_checkpoint",
+      "_physics_policy",
+      "env",
+      "material_objects",
+      "sim",
+      "unwrapped"
+    ],
+    "required_boundary": "robot_agent.workflows.semantic_backend.CompetitionEnvBackend"
+  },
+  "summary": {
+    "files_scanned": 15,
+    "violations": 0,
+    "compliant": true
+  },
+  "violations": []
+}

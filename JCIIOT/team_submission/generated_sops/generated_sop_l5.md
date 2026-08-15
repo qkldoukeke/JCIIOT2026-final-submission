@@ -49,6 +49,10 @@
   - `white_tote_b01_left_center`
   - `white_tote_b01_left_front`
   - `white_tote_b01_left_back`
+- Safety-scheduled execution order (rear-first):
+  - `white_tote_b01_left_back`
+  - `white_tote_b01_left_center`
+  - `white_tote_b01_left_front`
 
 ## Station Geometry
 
@@ -69,7 +73,7 @@
 ## Required Skill Flow
 
 1. `move(target="input_1")`
-2. Pick the required objects in configured order: `white_tote_b01_left_center`, `white_tote_b01_left_front`, `white_tote_b01_left_back`
+2. Pick the required objects in safety-scheduled order: `white_tote_b01_left_back`, `white_tote_b01_left_center`, `white_tote_b01_left_front`
 3. `move(target="aux_output_1")` while carrying the object
 4. `place_down(target="aux_output_1")`
 5. Repeat the pick/transport/place cycle until `3` objects are placed.
