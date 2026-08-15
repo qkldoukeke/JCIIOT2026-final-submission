@@ -5,7 +5,8 @@
 - 代码仓库：<https://github.com/qkldoukeke/JCIIOT2026-final-submission>
 - 排行榜提交：<https://github.com/JCIIOT2026/JCIIOT2026/issues/13>
 - 机器可读提交清单：`JCIIOT/team_submission/submission_manifest.json`
-- 五题原始证据索引：`JCIIOT/team_submission/evidence/EVIDENCE_INDEX.json`
+- 当前五题复测证据索引：`JCIIOT/team_submission/evidence_retest_20260815/EVIDENCE_INDEX.json`
+- 历史五题证据索引：`JCIIOT/team_submission/evidence/EVIDENCE_INDEX.json`
 
 ## 最终结果
 
@@ -13,14 +14,14 @@
 
 | Level | Score | Time | Environment |
 |---|---:|---:|---|
-| L1 | 10/10 | 39.584 s | `FactorySorting1_3FO3ERFHISEM` |
-| L2 | 15/15 | 39.549 s | `FactorySorting3_3FO3ERRPH7X9` |
-| L3 | 20/20 | 40.750 s | `FactorySorting5_3FO3ERTPXEUT` |
-| L4 | 25/25 | 49.415 s | `FactorySorting7_3FO3ERFKY9RN` |
-| L5 | 30/30 | 98.462 s | `FactorySorting9_3FO3ERT2C5FP` |
-| Total | **100/100** | **267.760 s** | L1–L5 |
+| L1 | 10/10 | 40.163 s | `FactorySorting1_3FO3ERFHISEM` |
+| L2 | 15/15 | 38.976 s | `FactorySorting3_3FO3ERRPH7X9` |
+| L3 | 20/20 | 39.762 s | `FactorySorting5_3FO3ERTPXEUT` |
+| L4 | 25/25 | 46.651 s | `FactorySorting7_3FO3ERFKY9RN` |
+| L5 | 30/30 | 102.583 s | `FactorySorting9_3FO3ERT2C5FP` |
+| Total | **100/100** | **268.135 s** | L1–L5 |
 
-每题的 `score.json`、`result.json` 和 `trajectory.json` 均保存在 `JCIIOT/team_submission/evidence/`，并使用 SHA-256 固定。
+当前重构后复测的 `score.json`、`result.json` 和 `trajectory.json` 保存在 `JCIIOT/team_submission/evidence_retest_20260815/`，并使用 SHA-256 固定；2026-08-11 的历史满分证据继续保留在 `JCIIOT/team_submission/evidence/`，未被覆盖。
 
 ## 获取代码与模型
 

@@ -7,9 +7,9 @@
     "leaderboard_issue_url": "https://github.com/JCIIOT2026/JCIIOT2026/issues/13"
   },
   "version_control": {
-    "runtime_baseline_commit": "4b9d7ed71d57e307d7a0bb3b41f55201704a466e",
-    "release_content_commit": "6f06dfeae82df5861c30b2c3d5d8e752908b922d",
-    "release_content_commit_semantics": "Immutable pre-manifest-finalization commit containing all repaired submission content"
+    "runtime_baseline_commit": "e3527752206896eb75df6b1f77ea22c2b3b41ca1",
+    "release_content_commit": "e3527752206896eb75df6b1f77ea22c2b3b41ca1",
+    "release_content_commit_semantics": "Immutable commit containing the verified runtime, five models, and 2026-08-15 full-app evidence before manifest finalization"
   },
   "official_reference": {
     "repository_url": "https://github.com/JCIIOT2026/JCIIOT2026",
@@ -31,9 +31,10 @@
   "result_summary": {
     "score": 100,
     "max_score": 100,
-    "total_elapsed_sec": 267.76,
-    "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json",
-    "evidence_stage": "historical pre-boundary-refactor official scoring run"
+    "total_elapsed_sec": 268.135,
+    "evidence_index": "team_submission/evidence_retest_20260815/EVIDENCE_INDEX.json",
+    "evidence_stage": "2026-08-15 post-refactor local official app scoring run",
+    "organizer_result_pending": true
   },
   "post_refactor_regression": {
     "date_local": "2026-08-15",
@@ -53,76 +54,169 @@
     "L1": {
       "environment": "FactorySorting1_3FO3ERFHISEM",
       "score": 10,
-      "elapsed_sec": 39.584,
-      "grasp_router": "scripted_first_with_bc_recovery",
+      "elapsed_sec": 40.163,
+      "step_sequence": [
+        "move",
+        "pick_up",
+        "move",
+        "place_down"
+      ],
+      "base_path_length_m": 38.738601,
+      "frame_count": 634,
       "checkpoint": {
         "path": "team_submission/models/final/l1/model_epoch_20.pth",
+        "size": 139519676,
         "sha256": "1b13ed397d5d52141a9a32610dfc4a8829bdc6f4d5164f97ce9e5bd01f7e251e"
       },
       "evidence": {
-        "score": {"path": "team_submission/evidence/L1/score.json", "sha256": "b6ad1dd66c4b8747ec645fb950ef97da467309afd7b64f0679c42d414f58595a"},
-        "result": {"path": "team_submission/evidence/L1/result.json", "sha256": "0815cb84f7029d48e98f263daae8323ffd1c5a4a863c7a1f8df0c18d650db680"},
-        "trajectory": {"path": "team_submission/evidence/L1/trajectory.json", "sha256": "6b6ea958bf36699cf0afcc2c2248440659402166221a613fc4c1f0d516a197b1"}
+        "score": {
+          "path": "team_submission/evidence_retest_20260815/L1/score.json",
+          "sha256": "d4c440199a480906404a3e885e66326368fc0d7c15bbab4cb3c070faac0e8061"
+        },
+        "result": {
+          "path": "team_submission/evidence_retest_20260815/L1/result.json",
+          "sha256": "1755ca9fb6dab36ea4434b0bbc28aa3b49180dd41d0127e7b66cebeb52578eb4"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence_retest_20260815/L1/trajectory.json",
+          "sha256": "75384b8caeec9e68c9490740aac48fe96e46d0c49dbdb7d5e3082cc845c66f0c"
+        }
       }
     },
     "L2": {
       "environment": "FactorySorting3_3FO3ERRPH7X9",
       "score": 15,
-      "elapsed_sec": 39.549,
-      "grasp_router": "scripted_first_with_bc_recovery",
+      "elapsed_sec": 38.976,
+      "step_sequence": [
+        "move",
+        "pick_up",
+        "move",
+        "place_down"
+      ],
+      "base_path_length_m": 35.263066,
+      "frame_count": 596,
       "checkpoint": {
         "path": "team_submission/models/final/l2/model_epoch_50.pth",
+        "size": 139543066,
         "sha256": "9352d87f4c8ebbb81b3ccd63b09a2442fed4ec45f686121e1b91bb02c3ba1bbe"
       },
       "evidence": {
-        "score": {"path": "team_submission/evidence/L2/score.json", "sha256": "b2239a8c8c3de70f8e2c250a8f07906812a7ea2b78080a55d1971e2aebf66446"},
-        "result": {"path": "team_submission/evidence/L2/result.json", "sha256": "f3cae23f5502f45bee191b494e26a383bc90429ead6cf1a138625e9db5c5decd"},
-        "trajectory": {"path": "team_submission/evidence/L2/trajectory.json", "sha256": "bdc9f50cbfb5bda5965c9dffa652fb73b1655110c5a9ab5de6ef608090e19671"}
+        "score": {
+          "path": "team_submission/evidence_retest_20260815/L2/score.json",
+          "sha256": "034cfcbeae7ab4e7853256a49ea89a3eed5c6cd4bbeac0a53f63ec1f73c4feda"
+        },
+        "result": {
+          "path": "team_submission/evidence_retest_20260815/L2/result.json",
+          "sha256": "8ee078a88223aa35d34eb4da643d456b5be68cd4d9825471aaa74d34dad8385d"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence_retest_20260815/L2/trajectory.json",
+          "sha256": "a52a4e33f0b6e688ce0f9c6d5e86dc7a527941728f3b4f477a59775bbc1b5017"
+        }
       }
     },
     "L3": {
       "environment": "FactorySorting5_3FO3ERTPXEUT",
       "score": 20,
-      "elapsed_sec": 40.75,
-      "grasp_router": "scripted_first_with_bc_recovery",
+      "elapsed_sec": 39.762,
+      "step_sequence": [
+        "move",
+        "pick_up",
+        "move",
+        "place_down"
+      ],
+      "base_path_length_m": 38.667238,
+      "frame_count": 628,
       "checkpoint": {
         "path": "team_submission/models/final/l3/model_epoch_100.pth",
+        "size": 139543517,
         "sha256": "6052020c4cd75321d29dd9e108e9a0f4b34c3f7823e36831c2666a09bc074c52"
       },
       "evidence": {
-        "score": {"path": "team_submission/evidence/L3/score.json", "sha256": "1d5d9ff281f7cd25a29f26bcd23a5c5d0e26e869e776ff2b40ead4b7ce7c7a2b"},
-        "result": {"path": "team_submission/evidence/L3/result.json", "sha256": "76e30cd421f279716e114e4887db9fbc48427bac273d975453d117a3495081ee"},
-        "trajectory": {"path": "team_submission/evidence/L3/trajectory.json", "sha256": "b56b3a5e3c5ac5b4359dcf94e21f61c0ebaa082f5ec3e09f32d65fed34b5e786"}
+        "score": {
+          "path": "team_submission/evidence_retest_20260815/L3/score.json",
+          "sha256": "211a3f3cc98ea0eac31107a2741a09a88ae58713e784f9d0408f62028d66a251"
+        },
+        "result": {
+          "path": "team_submission/evidence_retest_20260815/L3/result.json",
+          "sha256": "997d2cfb4e4054cb5cc318cdde9691ea1e827bc34bc7439481bfec27c072537a"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence_retest_20260815/L3/trajectory.json",
+          "sha256": "c73a408642282320b9842b6748b5babdb142da65a6b9690c6e145e09ae25fa7e"
+        }
       }
     },
     "L4": {
       "environment": "FactorySorting7_3FO3ERFKY9RN",
       "score": 25,
-      "elapsed_sec": 49.415,
-      "grasp_router": "scripted_first_with_bc_recovery",
+      "elapsed_sec": 46.651,
+      "step_sequence": [
+        "move",
+        "pick_up",
+        "move",
+        "place_down"
+      ],
+      "base_path_length_m": 56.056676,
+      "frame_count": 819,
       "checkpoint": {
         "path": "team_submission/models/final/l4/model_epoch_50.pth",
+        "size": 139543066,
         "sha256": "0aa08fcea60ad6a79fd59632b0fda5101cfaac37d5b2a50fb6881a203419ef8f"
       },
       "evidence": {
-        "score": {"path": "team_submission/evidence/L4/score.json", "sha256": "575b6b3270de3c0a919dc8a6223378612be6cab2188b03dba8ee24da66eea929"},
-        "result": {"path": "team_submission/evidence/L4/result.json", "sha256": "f2fdf37779fc190cefc72502a4213d425f3abee5c391e3682c50e07f09b035b6"},
-        "trajectory": {"path": "team_submission/evidence/L4/trajectory.json", "sha256": "5ccb140091b533295d40d1094a9f65d1725ffc996bfea033bf86c297c7182376"}
+        "score": {
+          "path": "team_submission/evidence_retest_20260815/L4/score.json",
+          "sha256": "7e5cc93e7a20241b31fed240947340fba8a2b604bf7e772258fff5ecd85ba87a"
+        },
+        "result": {
+          "path": "team_submission/evidence_retest_20260815/L4/result.json",
+          "sha256": "3b1e650d93ab5cb29b934db0ff3eb1283d22c6efdb7fd7f8437f0666f71692a6"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence_retest_20260815/L4/trajectory.json",
+          "sha256": "9214184ea89973a1c2651debb9fc9005c01b39806ba9b45e0d6841a928349ab8"
+        }
       }
     },
     "L5": {
       "environment": "FactorySorting9_3FO3ERT2C5FP",
       "score": 30,
-      "elapsed_sec": 98.462,
-      "grasp_router": "scripted_first_with_bc_recovery",
+      "elapsed_sec": 102.583,
+      "step_sequence": [
+        "move",
+        "pick_up",
+        "move",
+        "place_down",
+        "move",
+        "pick_up",
+        "move",
+        "place_down",
+        "move",
+        "pick_up",
+        "move",
+        "place_down"
+      ],
+      "base_path_length_m": 116.807806,
+      "frame_count": 1910,
       "checkpoint": {
         "path": "team_submission/models/final/l5/model_epoch_100.pth",
+        "size": 4901219,
         "sha256": "f9c6f32cc7ff7d66bae08adb1bf0dfc0f6f36010db68e76723a6a10468bbea1f"
       },
       "evidence": {
-        "score": {"path": "team_submission/evidence/L5/score.json", "sha256": "1b662d26dcee5e25ccaf0050d8c537351e49874f8aa28cc22661692d3f965f1e"},
-        "result": {"path": "team_submission/evidence/L5/result.json", "sha256": "f9d7b7e2dfc5dbe1aa78ea139e5bf8a93cdc0927ae19107a110ec07568f3101e"},
-        "trajectory": {"path": "team_submission/evidence/L5/trajectory.json", "sha256": "88dfd37cacaede008cd6eb70db998af4124f4ad953bf9cbdfc232d7bdbc3fc82"}
+        "score": {
+          "path": "team_submission/evidence_retest_20260815/L5/score.json",
+          "sha256": "406b1a16bb4cd1d3e61f5f26c6596c01fcaf915d477345bcaaf3071d84856d46"
+        },
+        "result": {
+          "path": "team_submission/evidence_retest_20260815/L5/result.json",
+          "sha256": "2c4492875cf70505517fbfd5af323be786415b6a510f114c9aa2df1512cb7f2e"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence_retest_20260815/L5/trajectory.json",
+          "sha256": "ba15e0d775aef034a07f0a6fe55dd525affe035eae7e570ee6813435a17bf4a5"
+        }
       }
     }
   },
@@ -174,5 +268,146 @@
     "inference_reproducible": true,
     "training_data_in_repository": false,
     "data_manifest": "team_submission/TRAINING_DATA_MANIFEST.md"
+  },
+  "historical_result_summary": {
+    "score": 100,
+    "max_score": 100,
+    "total_elapsed_sec": 267.76,
+    "evidence_index": "team_submission/evidence/EVIDENCE_INDEX.json",
+    "evidence_stage": "historical pre-boundary-refactor official scoring run"
+  },
+  "historical_level_results": {
+    "L1": {
+      "environment": "FactorySorting1_3FO3ERFHISEM",
+      "score": 10,
+      "elapsed_sec": 39.584,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l1/model_epoch_20.pth",
+        "sha256": "1b13ed397d5d52141a9a32610dfc4a8829bdc6f4d5164f97ce9e5bd01f7e251e"
+      },
+      "evidence": {
+        "score": {
+          "path": "team_submission/evidence/L1/score.json",
+          "sha256": "b6ad1dd66c4b8747ec645fb950ef97da467309afd7b64f0679c42d414f58595a"
+        },
+        "result": {
+          "path": "team_submission/evidence/L1/result.json",
+          "sha256": "0815cb84f7029d48e98f263daae8323ffd1c5a4a863c7a1f8df0c18d650db680"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence/L1/trajectory.json",
+          "sha256": "6b6ea958bf36699cf0afcc2c2248440659402166221a613fc4c1f0d516a197b1"
+        }
+      }
+    },
+    "L2": {
+      "environment": "FactorySorting3_3FO3ERRPH7X9",
+      "score": 15,
+      "elapsed_sec": 39.549,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l2/model_epoch_50.pth",
+        "sha256": "9352d87f4c8ebbb81b3ccd63b09a2442fed4ec45f686121e1b91bb02c3ba1bbe"
+      },
+      "evidence": {
+        "score": {
+          "path": "team_submission/evidence/L2/score.json",
+          "sha256": "b2239a8c8c3de70f8e2c250a8f07906812a7ea2b78080a55d1971e2aebf66446"
+        },
+        "result": {
+          "path": "team_submission/evidence/L2/result.json",
+          "sha256": "f3cae23f5502f45bee191b494e26a383bc90429ead6cf1a138625e9db5c5decd"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence/L2/trajectory.json",
+          "sha256": "bdc9f50cbfb5bda5965c9dffa652fb73b1655110c5a9ab5de6ef608090e19671"
+        }
+      }
+    },
+    "L3": {
+      "environment": "FactorySorting5_3FO3ERTPXEUT",
+      "score": 20,
+      "elapsed_sec": 40.75,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l3/model_epoch_100.pth",
+        "sha256": "6052020c4cd75321d29dd9e108e9a0f4b34c3f7823e36831c2666a09bc074c52"
+      },
+      "evidence": {
+        "score": {
+          "path": "team_submission/evidence/L3/score.json",
+          "sha256": "1d5d9ff281f7cd25a29f26bcd23a5c5d0e26e869e776ff2b40ead4b7ce7c7a2b"
+        },
+        "result": {
+          "path": "team_submission/evidence/L3/result.json",
+          "sha256": "76e30cd421f279716e114e4887db9fbc48427bac273d975453d117a3495081ee"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence/L3/trajectory.json",
+          "sha256": "b56b3a5e3c5ac5b4359dcf94e21f61c0ebaa082f5ec3e09f32d65fed34b5e786"
+        }
+      }
+    },
+    "L4": {
+      "environment": "FactorySorting7_3FO3ERFKY9RN",
+      "score": 25,
+      "elapsed_sec": 49.415,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l4/model_epoch_50.pth",
+        "sha256": "0aa08fcea60ad6a79fd59632b0fda5101cfaac37d5b2a50fb6881a203419ef8f"
+      },
+      "evidence": {
+        "score": {
+          "path": "team_submission/evidence/L4/score.json",
+          "sha256": "575b6b3270de3c0a919dc8a6223378612be6cab2188b03dba8ee24da66eea929"
+        },
+        "result": {
+          "path": "team_submission/evidence/L4/result.json",
+          "sha256": "f2fdf37779fc190cefc72502a4213d425f3abee5c391e3682c50e07f09b035b6"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence/L4/trajectory.json",
+          "sha256": "5ccb140091b533295d40d1094a9f65d1725ffc996bfea033bf86c297c7182376"
+        }
+      }
+    },
+    "L5": {
+      "environment": "FactorySorting9_3FO3ERT2C5FP",
+      "score": 30,
+      "elapsed_sec": 98.462,
+      "grasp_router": "scripted_first_with_bc_recovery",
+      "checkpoint": {
+        "path": "team_submission/models/final/l5/model_epoch_100.pth",
+        "sha256": "f9c6f32cc7ff7d66bae08adb1bf0dfc0f6f36010db68e76723a6a10468bbea1f"
+      },
+      "evidence": {
+        "score": {
+          "path": "team_submission/evidence/L5/score.json",
+          "sha256": "1b662d26dcee5e25ccaf0050d8c537351e49874f8aa28cc22661692d3f965f1e"
+        },
+        "result": {
+          "path": "team_submission/evidence/L5/result.json",
+          "sha256": "f9d7b7e2dfc5dbe1aa78ea139e5bf8a93cdc0927ae19107a110ec07568f3101e"
+        },
+        "trajectory": {
+          "path": "team_submission/evidence/L5/trajectory.json",
+          "sha256": "88dfd37cacaede008cd6eb70db998af4124f4ad953bf9cbdfc232d7bdbc3fc82"
+        }
+      }
+    }
+  },
+  "full_app_retest": {
+    "date_local": "2026-08-15",
+    "entrypoint": "official app.py Execute workflow",
+    "levels_passed": 5,
+    "levels_run": 5,
+    "score": 100,
+    "max_score": 100,
+    "total_elapsed_sec": 268.135,
+    "evidence_index": "team_submission/evidence_retest_20260815/EVIDENCE_INDEX.json",
+    "complete_navigation_present": true,
+    "runtime_source_equivalence_report": "team_submission/audits/prepublish_source_equivalence.json"
   }
 }

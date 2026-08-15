@@ -3,12 +3,14 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import subprocess
+import sys
 from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PYTHON_EXE = Path(r"D:\tool\anaconda3\envs\jci_clean\python.exe")
+PYTHON_EXE = Path(os.environ.get("JCI_PYTHON") or sys.executable).resolve()
 DEFAULT_CONFIG_PATH = (
     PROJECT_ROOT
     / "team_submission"
@@ -69,7 +71,7 @@ def main() -> None:
             cwd=PROJECT_ROOT,
             stdout=stdout_file,
             stderr=stderr_file,
-            creationflags=subprocess.CREATE_NO_WINDOW,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
 
     run_info = {

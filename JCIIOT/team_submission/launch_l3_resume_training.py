@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 import subprocess
+import sys
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PYTHON_EXE = Path(r"D:\tool\anaconda3\envs\jci_clean\python.exe")
+PYTHON_EXE = Path(os.environ.get("JCI_PYTHON") or sys.executable).resolve()
 CONFIG_PATH = Path(
     "team_submission/training_configs/factory_sorting_l3_bc_resume_to_100.json"
 )
@@ -31,7 +33,7 @@ def main() -> None:
             cwd=PROJECT_ROOT,
             stdout=stdout_file,
             stderr=stderr_file,
-            creationflags=subprocess.CREATE_NO_WINDOW,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
     print(process.pid)
 

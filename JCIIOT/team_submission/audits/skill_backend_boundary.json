@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T15:17:23.545209+00:00",
+  "generated_at": "2026-08-15T15:30:33.606214+00:00",
   "scope": "src/robot_agent/skills/*.py",
   "policy": {
     "forbidden_import_prefixes": [

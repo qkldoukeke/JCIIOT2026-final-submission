@@ -14,7 +14,6 @@ from typing import Callable
 ROOT = Path(__file__).resolve().parents[2]
 REPOSITORY_ROOT = ROOT.parent
 MANIFEST_PATH = ROOT / "team_submission" / "submission_manifest.json"
-EVIDENCE_INDEX_PATH = ROOT / "team_submission" / "evidence" / "EVIDENCE_INDEX.json"
 LFS_HEADER = b"version https://git-lfs.github.com/spec/v1"
 COMMIT_SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 RUNTIME_PATHS = (
@@ -119,7 +118,8 @@ def _git_blob(commit: str, relative_to_root: str) -> bytes:
 
 def check_evidence(manifest: dict) -> list[str]:
     failures: list[str] = []
-    index = read_json(EVIDENCE_INDEX_PATH)
+    index_path = ROOT / manifest["result_summary"]["evidence_index"]
+    index = read_json(index_path)
     if manifest.get("level_results") != index.get("levels"):
         failures.append("manifest level_results differ from evidence index")
     baseline = manifest["version_control"]["runtime_baseline_commit"]
@@ -186,6 +186,18 @@ def check_generated_sops(_: dict) -> list[str]:
         path = ROOT / "team_submission" / "generated_sops" / f"generated_sop_{record['level'].lower()}.md"
         if not path.is_file() or sha256_file(path) != record.get("generated_sop_sha256"):
             failures.append(f"{record.get('level')}: generated SOP hash mismatch")
+    return failures
+
+
+def check_skill_backend_boundary(_: dict) -> list[str]:
+    failures: list[str] = []
+    audit_path = ROOT / "team_submission" / "audits" / "skill_backend_boundary.json"
+    audit = read_json(audit_path)
+    summary = audit.get("summary", {})
+    if not summary.get("compliant"):
+        failures.append("skill/backend boundary audit is not compliant")
+    if int(summary.get("violations", -1)) != 0:
+        failures.append("skill/backend boundary audit reports violations")
     return failures
 
 
@@ -256,7 +268,11 @@ def check_documents(manifest: dict) -> list[str]:
         "提交合规说明.md": [official["commit"], official["archive_sha256"], "100/100"],
         "最终提交清单.md": [identity["team_name"], identity["participant_id"], identity["leaderboard_issue_url"]],
         "排行榜提交草稿.md": [identity["team_name"], identity["participant_id"], identity["leaderboard_issue_url"], official["commit"]],
-        "实验开发日志.md": [official["commit"], official["archive_sha256"], "267.760"],
+        "实验开发日志.md": [
+            official["commit"],
+            official["archive_sha256"],
+            f"{manifest['result_summary']['total_elapsed_sec']:.3f}",
+        ],
     }
     forbidden = ("<请填写>", "01032e8dc97fcd376502b71327ad8cbea6b6589b")
     for name, tokens in expected_by_document.items():
@@ -281,6 +297,7 @@ def main() -> int:
         ("Model files", check_models),
         ("Evidence integrity", check_evidence),
         ("Task checkpoint routing", check_routing),
+        ("Skill / backend boundary", check_skill_backend_boundary),
         ("Generated SOP", check_generated_sops),
         ("Protected boundary", check_boundary),
         ("Documentation consistency", check_documents),

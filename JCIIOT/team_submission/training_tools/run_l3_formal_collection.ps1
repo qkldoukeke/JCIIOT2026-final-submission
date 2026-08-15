@@ -1,7 +1,8 @@
 $ErrorActionPreference = "Stop"
 
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$pythonExe = "D:\tool\anaconda3\envs\jci_clean\python.exe"
+. (Join-Path $PSScriptRoot "..\resolve_python.ps1")
+$pythonExe = Get-JciPython
 $collectorPath = Join-Path $projectRoot "team_submission\training_tools\collect_factory_sorting.py"
 $outputRoot = Join-Path $projectRoot "team_submission\training_data_raw\l3_formal"
 $runLogRoot = Join-Path $projectRoot "team_submission\training_runs"
